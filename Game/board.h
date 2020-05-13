@@ -1,7 +1,9 @@
 #pragma once
+#include <string>
 
-#ifndef _HEADERGUARD_BOARD_H_
-#define _HEADERGUARD_BOARD_H_
+using namespace std;
+
+
 
 class Board
 {
@@ -10,8 +12,5 @@ public:
 	~Board();
 
 private:
-
+	void loadBoardFromFile(string filename);
 };
-
-
-#endif

@@ -7,5 +7,5 @@ public:
 	~Enemy();
 
 private:
-
+	float speed;
 };
