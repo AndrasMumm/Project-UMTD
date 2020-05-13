@@ -1,5 +1,4 @@
-#include "graphicsclass.h"
-#include "stdafx.h"
+﻿#include "graphicsclass.h"
 
 GraphicsClass::GraphicsClass()
 {

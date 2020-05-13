@@ -1,5 +1,5 @@
-#include "inputclass.h"
-#include "stdafx.h"
+﻿#include "inputclass.h"
+
 InputClass::InputClass()
 {
 }
