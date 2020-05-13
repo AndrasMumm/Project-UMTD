@@ -6,7 +6,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	bool result;
 
 	// Create the system object.
-	System = new SystemClass;
+	System = new SystemClass();
 	if (!System)
 	{
 		return 0;
