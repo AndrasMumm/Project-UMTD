@@ -35,6 +35,7 @@ public:
 	int kills;
 	float dmg;
 	int sell_value;
+
 	
 
 };

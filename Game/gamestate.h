@@ -24,4 +24,5 @@ public:
 	void init();
 
 	int wave;
+
 };
