@@ -162,11 +162,16 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="gamestate.h" />
+    <ClInclude Include="helpingHeader.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
     <ClInclude Include="timing.h" />
     <ClInclude Include="tower.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="temp.cpp" />
+    <ClCompile Include="board.cpp" />
+    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
