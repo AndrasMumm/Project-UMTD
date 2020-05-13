@@ -1,5 +1,8 @@
 ﻿#include <iostream>
-int main()
+#include <windows.h>
+#include <Rendering/renderingMain.h>
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
-	std::cout << "test";
+	RenderingMain(hInstance, hPrevInstance, pScmdline, iCmdshow);
 }
