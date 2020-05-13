@@ -147,8 +147,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="board.h" />
+    <ClInclude Include="enemy.h" />
+    <ClInclude Include="gamestate.h" />
+    <ClInclude Include="timing.h" />
+    <ClInclude Include="tower.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
