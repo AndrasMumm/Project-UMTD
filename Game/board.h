@@ -12,12 +12,12 @@ class Board
 public:
 	Board();
 	~Board();
-
+	void loadBoardFromFile(string filename);
 private:
 
 	int rows;
 	int cols;
 
-	void loadBoardFromFile(string filename);
+	
 	vvint map; // row mayor
 };

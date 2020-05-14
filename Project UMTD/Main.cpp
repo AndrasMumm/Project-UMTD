@@ -3,6 +3,8 @@
 #include <Rendering/renderingMain.h>
 
 #include "Rendering\systemclass.h"
+#include "Game\gamestate.h"
+#include "Game\board.h"
 
 #include <dxgi.h>
 #include <d3dcommon.h>
@@ -10,6 +12,9 @@
 
 int WINAPI RenderingMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
+
+	//Rendering Objects
+
 	SystemClass* System;
 	bool result;
 
@@ -20,7 +25,14 @@ int WINAPI RenderingMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScm
 		return 0;
 	}
 
+	//Game Objects
+	
+	GameState* gameState = new GameState();
+
+
+
 	// Initialize and run the system object.
+	
 	result = System->Initialize();
 	if (result)
 	{
@@ -31,6 +43,10 @@ int WINAPI RenderingMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScm
 	System->Shutdown();
 	delete System;
 	System = 0;
+
+	//delete Game Objects
+
+	delete gameState;
 
 	return 0;
 }
