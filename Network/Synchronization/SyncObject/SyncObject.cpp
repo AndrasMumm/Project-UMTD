@@ -1,4 +1,4 @@
-﻿#include "SyncObject.h"
+﻿#include "syncObject.h"
 #include <cstdint>
 
 SyncObject::SyncObject(void* ptr)

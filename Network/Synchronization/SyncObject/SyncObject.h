@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <Network/packet.h>
 
 class SyncObject
 {
@@ -9,6 +10,6 @@ public:
 
 	void* getRawPointer() const;
 
-	virtual void update(char* data, int size) = 0;
-	virtual char* getUpdateData(int* size) = 0;
+	virtual void update(Packet& packet) = 0;
+	virtual Packet& getUpdateData() = 0;
 };
