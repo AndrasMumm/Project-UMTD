@@ -21,10 +21,15 @@
   <ItemGroup>
     <ClInclude Include="client.h" />
     <ClInclude Include="server.h" />
+    <ClInclude Include="Synchronization\SyncObject\SyncObject.h" />
+    <ClInclude Include="Synchronization\SyncObject\SyncFloat.cpp" />
+    <ClInclude Include="Synchronization\SyncManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cpp" />
     <ClCompile Include="server.cpp" />
+    <ClCompile Include="Synchronization\SyncObject\SyncObject.cpp" />
+    <ClCompile Include="Synchronization\SyncManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
