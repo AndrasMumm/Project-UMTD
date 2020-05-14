@@ -10,7 +10,7 @@
 #include <d3dcommon.h>
 #include <d3d11.h>
 
-int WINAPI RenderingMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow)
 {
 
 	//Rendering Objects
