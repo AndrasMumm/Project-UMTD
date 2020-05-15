@@ -1,9 +1,9 @@
 #pragma once
 
-#include <windows.h>
+#include "d3dclass.h"
 
 const bool FULL_SCREEN = true;
-const bool VSYNC_ENABLED = true;
+const bool VSYNC_ENABLED = false;
 const float SCREEN_DEPTH = 1000.0f;
 const float SCREEN_NEAR = 0.1f;
 
@@ -22,4 +22,5 @@ private:
 	bool Render();
 
 private:
+	D3DClass* m_Direct3D;
 };
