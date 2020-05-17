@@ -33,9 +33,5 @@ public:
 	int price;
 	int value;
 	int kills;
-	float dmg;
 	int sell_value;
-
-	
-
 };
