@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{1be7a24f-c62b-4a2f-9552-99cd7532a102}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="systemclass.h">
@@ -25,6 +28,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="d3dclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="colorshaderclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -44,5 +50,16 @@
     <ClCompile Include="d3dclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="colorshaderclass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Color.vs">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="color.ps">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

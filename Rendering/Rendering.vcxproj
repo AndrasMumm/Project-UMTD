@@ -159,17 +159,23 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="colorshaderclass.h" />
     <ClInclude Include="d3dclass.h" />
     <ClInclude Include="graphicsclass.h" />
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="systemclass.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="colorshaderclass.cpp" />
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
     <ClCompile Include="renderingMain.h" />
     <ClCompile Include="systemclass.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="color.ps" />
+    <None Include="Color.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
