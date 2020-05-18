@@ -280,5 +280,16 @@ void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
 }
 
 void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices) {
-	vec3 bl = vec3()
+	
+	vec3 bl = vec3(tl.x, br.y, 0);
+	vec3 tr = vec3(br.x, tl.y, 0);
+
+	vertices.push_back(tr);
+	vertices.push_back(tl);
+	vertices.push_back(bl);
+	vertices.push_back(bl);
+	vertices.push_back(br);
+	vertices.push_back(tr);
+
+
 }
