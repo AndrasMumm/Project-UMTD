@@ -1,4 +1,4 @@
-// Include standard headers
+﻿// Include standard headers
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,18 +18,15 @@ using namespace glm;
 #include "texture.hpp"
 #include "controls.hpp"
 
-
 #include <Game\board.h>
 #include <Game\gamestate.h>
 
-
 typedef vector<vec3> vvec3;
 
-void createBlancBoard(Board* board,vvec3& vertices, vvec3& uvices);
+void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices);
 void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices);
 int screen_width = 1920 / 2;
 int screen_height = 1080 / 2;
-
 
 int main(void)
 {
@@ -48,7 +45,7 @@ int main(void)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow(screen_width, screen_height, "SpielEntk�ferer", NULL, NULL);
+	window = glfwCreateWindow(screen_width, screen_height, "SpielEntkäferer", NULL, NULL);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		getchar();
@@ -183,12 +180,6 @@ int main(void)
 		0.667979f, 0.335851f
 	};
 
-
-
-
-
-
-
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -200,7 +191,6 @@ int main(void)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 
 	do {
-
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -214,7 +204,7 @@ int main(void)
 		glm::mat4 ModelMatrix = glm::mat4(1.0);
 		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
-		// Send our transformation to the currently bound shader, 
+		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
 
@@ -257,7 +247,6 @@ int main(void)
 		// Swap buffers
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-
 	} // Check if the ESC key was pressed or the window was closed
 	while (glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS &&
 		glfwWindowShouldClose(window) == 0);
@@ -275,33 +264,21 @@ int main(void)
 	return 0;
 }
 
-
-
 void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
-
 	int gridSize = board->cols / screen_width > board->rows / screen_height ? 2.0f / board->cols : 2.0f / board->rows;
-	
-	for (int x = 0; x < board->cols; x++) {
-		
-		for (int y = 0; y < board->rows; y++) {
 
+	for (int x = 0; x < board->cols; x++) {
+		for (int y = 0; y < board->rows; y++) {
 			float px = -1 + x * gridSize;
 			float pxp = px + gridSize;
 			float py = -1 + x * gridSize;
 			float pyp = py + gridSize;
 
 			addTile(vec3(px, pyp, 0.0f), vec3(pxp, py, 0.0f), board->map[x][y], vertices, uvices);
-
 		}
-
 	}
-
-
 }
 
 void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices) {
-
-
 	vec3 bl = vec3()
-
 }
