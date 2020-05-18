@@ -117,7 +117,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\Project-UMTD\Dependencies\glew-2.1.0\include;..\Dependencies\glm;..\Dependencies;..\;..\Dependencies\glfw-3.3.2.bin.WIN64\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Dependencies\glew-2.1.0\include;..\Dependencies\glm;..\Dependencies;..\;..\Dependencies\glfw-3.3.2.bin.WIN64\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
