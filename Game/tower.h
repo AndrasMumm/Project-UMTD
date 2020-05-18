@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "enemy.h"
 
 enum TargetType
@@ -16,7 +16,7 @@ class Tower
 public:
 
 	Tower() {};
-	//~Tower();
+	~Tower() {};
 
 	virtual void init() = 0;
 	virtual void update() = 0;
@@ -33,9 +33,5 @@ public:
 	int price;
 	int value;
 	int kills;
-	//float dmg;
 	int sell_value;
-
-	
-
 };

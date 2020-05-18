@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "SyncObject.h"
 
-class SyncFloat :SyncObject
+class SyncFloat : SyncObject
 {
 private:
 	float* dataPtr_;
