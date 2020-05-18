@@ -21,10 +21,11 @@ ColorShaderClass::~ColorShaderClass()
 bool ColorShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
 {
 	bool result;
-
+	WCHAR vs[] = L"../Rendering/colour.vs";
+	WCHAR ps[] = L"../Rendering/color.ps";
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, L"../Rendering/Shaders/Color.vs", L"../Rendering/Shaders/color.ps");
+	result = InitializeShader(device, hwnd, vs,	ps);
 	if (!result)
 	{
 		return false;

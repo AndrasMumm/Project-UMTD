@@ -3,8 +3,8 @@
 class Timing
 {
 public:
-	Timing();
-	~Timing();
+	Timing() {};
+	//~Timing();
 
 private:
 
