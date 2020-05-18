@@ -1,11 +1,10 @@
-#pragma once
+﻿#pragma once
 
 class Timing
 {
 public:
-	Timing();
-	~Timing();
+	Timing() {};
+	~Timing() {};
 
 private:
-
 };

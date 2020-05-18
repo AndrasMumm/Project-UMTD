@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project UMTD", "Project UMTD\Project UMTD.vcxproj", "{BFED5C55-D227-4CB7-ACAE-433120F4EC57}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Rendering", "Rendering\Rendering.vcxproj", "{F04E0E6B-80B8-4A42-9A9B-AEA2487E5BF3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Network", "Network\Network.vcxproj", "{7675A5A6-88E9-4F37-A77E-B8F38C82BDFD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetTest_Client", "NetTest_Client\NetTest_Client.vcxproj", "{FE720641-E9B4-4D64-9966-E61F79DF8871}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NetTest_Server", "NetTest_Server\NetTest_Server.vcxproj", "{595904A1-FB4B-497D-9C4A-863282E140F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,22 @@ Global
 		{7675A5A6-88E9-4F37-A77E-B8F38C82BDFD}.Release|x64.Build.0 = Release|x64
 		{7675A5A6-88E9-4F37-A77E-B8F38C82BDFD}.Release|x86.ActiveCfg = Release|Win32
 		{7675A5A6-88E9-4F37-A77E-B8F38C82BDFD}.Release|x86.Build.0 = Release|Win32
+		{FE720641-E9B4-4D64-9966-E61F79DF8871}.Debug|x64.ActiveCfg = Debug|x64
+		{FE720641-E9B4-4D64-9966-E61F79DF8871}.Debug|x64.Build.0 = Debug|x64
+		{FE720641-E9B4-4D64-9966-E61F79DF8871}.Debug|x86.ActiveCfg = Debug|Win32
+		{FE720641-E9B4-4D64-9966-E61F79DF8871}.Debug|x86.Build.0 = Debug|Win32
+		{FE720641-E9B4-4D64-9966-E61F79DF8871}.Release|x64.ActiveCfg = Release|x64
+		{FE720641-E9B4-4D64-9966-E61F79DF8871}.Release|x64.Build.0 = Release|x64
+		{FE720641-E9B4-4D64-9966-E61F79DF8871}.Release|x86.ActiveCfg = Release|Win32
+		{FE720641-E9B4-4D64-9966-E61F79DF8871}.Release|x86.Build.0 = Release|Win32
+		{595904A1-FB4B-497D-9C4A-863282E140F1}.Debug|x64.ActiveCfg = Debug|x64
+		{595904A1-FB4B-497D-9C4A-863282E140F1}.Debug|x64.Build.0 = Debug|x64
+		{595904A1-FB4B-497D-9C4A-863282E140F1}.Debug|x86.ActiveCfg = Debug|Win32
+		{595904A1-FB4B-497D-9C4A-863282E140F1}.Debug|x86.Build.0 = Debug|Win32
+		{595904A1-FB4B-497D-9C4A-863282E140F1}.Release|x64.ActiveCfg = Release|x64
+		{595904A1-FB4B-497D-9C4A-863282E140F1}.Release|x64.Build.0 = Release|x64
+		{595904A1-FB4B-497D-9C4A-863282E140F1}.Release|x86.ActiveCfg = Release|Win32
+		{595904A1-FB4B-497D-9C4A-863282E140F1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
