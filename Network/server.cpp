@@ -26,6 +26,7 @@ void Session::stop()
 
 bool Session::stopped() const
 {
+	return true;
 }
 
 void Session::startRead()
