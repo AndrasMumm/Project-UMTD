@@ -26,7 +26,7 @@ using namespace glm;
 typedef vector<vec3> vvec3;
 
 void createBlancBoard(Board* board,vvec3& vertices, vvec3& uvices);
-void addTile(vec3& br, vec3& tl, int type, vvec3& vertices, vvec3& uvices);
+void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices);
 int screen_width = 1920 / 2;
 int screen_height = 1080 / 2;
 
@@ -279,12 +279,18 @@ int main(void)
 
 void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
 
-	int gridSize = board->cols / screen_width > board->rows / screen_height ? 1.0f / board->cols : 1.0f / board->rows;
+	int gridSize = board->cols / screen_width > board->rows / screen_height ? 2.0f / board->cols : 2.0f / board->rows;
 	
 	for (int x = 0; x < board->cols; x++) {
 		
 		for (int y = 0; y < board->rows; y++) {
 
+			float px = -1 + x * gridSize;
+			float pxp = px + gridSize;
+			float py = -1 + x * gridSize;
+			float pyp = py + gridSize;
+
+			addTile(vec3(px, pyp, 0.0f), vec3(pxp, py, 0.0f), board->map[x][y], vertices, uvices);
 
 		}
 
@@ -293,8 +299,9 @@ void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
 
 }
 
-void addTile(vec3& br, vec3& tl, int type, vvec3& vertices, vvec3& uvices) {
+void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices) {
 
 
+	vec3 bl = vec3()
 
 }
