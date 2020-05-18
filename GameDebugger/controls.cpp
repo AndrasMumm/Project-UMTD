@@ -1,4 +1,4 @@
-// Include GLFW
+﻿// Include GLFW
 #include <GLFW/glfw3.h>
 extern GLFWwindow* window; // The "extern" keyword here is to access the variable "window" declared in tutorialXXX.cpp. This is a hack to keep the tutorials simple. Please avoid this.
 
@@ -19,7 +19,6 @@ glm::mat4 getProjectionMatrix() {
 	return ProjectionMatrix;
 }
 
-
 // Initial position : on +Z
 glm::vec3 position = glm::vec3(0, 0, 5);
 // Initial horizontal angle : toward -Z
@@ -32,10 +31,7 @@ float initialFoV = 45.0f;
 float speed = 3.0f; // 3 units / second
 float mouseSpeed = 0.005f;
 
-
-
 void computeMatricesFromInputs() {
-
 	// glfwGetTime is called only once, the first time this function is called
 	static double lastTime = glfwGetTime();
 
@@ -90,7 +86,7 @@ void computeMatricesFromInputs() {
 
 	float FoV = initialFoV;// - 5 * glfwGetMouseWheel(); // Now GLFW 3 requires setting up a callback for this. It's a bit too complicated for this beginner's tutorial, so it's disabled instead.
 
-	// Projection matrix : 45� Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 	ProjectionMatrix = glm::perspective(glm::radians(FoV), 4.0f / 3.0f, 0.1f, 100.0f);
 	// Camera matrix
 	ViewMatrix = glm::lookAt(
