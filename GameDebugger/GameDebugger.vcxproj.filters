@@ -29,22 +29,25 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="controls.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="shader.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="texture.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="controls.hpp">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TransformVertexShader.vertexshader">
-      <Filter>Source Files</Filter>
-    </None>
     <None Include="TextureFragmentShader.fragmentshader">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="TransformVertexShader.vertexshader">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

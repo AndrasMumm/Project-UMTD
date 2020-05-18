@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 // Include GLEW
 #include <GL/glew.h>
 // Include GLFW
@@ -81,7 +84,7 @@ int main(void)
 	glDepthFunc(GL_LESS);
 
 	// Cull triangles which normal is not towards the camera
-	glEnable(GL_CULL_FACE);
+	glDisable(GL_CULL_FACE);
 
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
@@ -94,101 +97,46 @@ int main(void)
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
 	// Load the texture
-	GLuint Texture = loadDDS("uvtemplate.DDS");
+	unsigned int texture;
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	// set the texture wrapping/filtering options (on the currently bound texture object)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// load and generate the texture
+	int width, height, nrChannels;
+	unsigned char *data = stbi_load("HexMap.png", &width, &height, &nrChannels, 0);
+	if (data)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		std::cout << "Failed to load texture" << std::endl;
+	}
+	stbi_image_free(data);
 
 	// Get a handle for our "myTextureSampler" uniform
 	GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
 
-	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
-	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
-	static const GLfloat g_vertex_buffer_data[] = {
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		 1.0f, 1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		 1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		 1.0f,-1.0f,-1.0f,
-		 1.0f, 1.0f,-1.0f,
-		 1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		 1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		-1.0f,-1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		-1.0f,-1.0f, 1.0f,
-		 1.0f,-1.0f, 1.0f,
-		 1.0f, 1.0f, 1.0f,
-		 1.0f,-1.0f,-1.0f,
-		 1.0f, 1.0f,-1.0f,
-		 1.0f,-1.0f,-1.0f,
-		 1.0f, 1.0f, 1.0f,
-		 1.0f,-1.0f, 1.0f,
-		 1.0f, 1.0f, 1.0f,
-		 1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f,-1.0f,
-		 1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f,-1.0f,
-		-1.0f, 1.0f, 1.0f,
-		 1.0f, 1.0f, 1.0f,
-		-1.0f, 1.0f, 1.0f,
-		 1.0f,-1.0f, 1.0f
-	};
+	vvec3 vertices;
+	vvec3 uvices;
+	GameState game = GameState();
+	createBlancBoard(&game.board, vertices, uvices);
 
-	// Two UV coordinatesfor each vertex. They were created with Blender.
-	static const GLfloat g_uv_buffer_data[] = {
-		0.000059f, 0.000004f,
-		0.000103f, 0.336048f,
-		0.335973f, 0.335903f,
-		1.000023f, 0.000013f,
-		0.667979f, 0.335851f,
-		0.999958f, 0.336064f,
-		0.667979f, 0.335851f,
-		0.336024f, 0.671877f,
-		0.667969f, 0.671889f,
-		1.000023f, 0.000013f,
-		0.668104f, 0.000013f,
-		0.667979f, 0.335851f,
-		0.000059f, 0.000004f,
-		0.335973f, 0.335903f,
-		0.336098f, 0.000071f,
-		0.667979f, 0.335851f,
-		0.335973f, 0.335903f,
-		0.336024f, 0.671877f,
-		1.000004f, 0.671847f,
-		0.999958f, 0.336064f,
-		0.667979f, 0.335851f,
-		0.668104f, 0.000013f,
-		0.335973f, 0.335903f,
-		0.667979f, 0.335851f,
-		0.335973f, 0.335903f,
-		0.668104f, 0.000013f,
-		0.336098f, 0.000071f,
-		0.000103f, 0.336048f,
-		0.000004f, 0.671870f,
-		0.336024f, 0.671877f,
-		0.000103f, 0.336048f,
-		0.336024f, 0.671877f,
-		0.335973f, 0.335903f,
-		0.667969f, 0.671889f,
-		1.000004f, 0.671847f,
-		0.667979f, 0.335851f
-	};
 
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(vertices[0]), vertices.data(), GL_STATIC_DRAW);
 
 	GLuint uvbuffer;
 	glGenBuffers(1, &uvbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, uvices.size() * sizeof(uvices[0]), uvices.data(), GL_STATIC_DRAW);
 
 	do {
 		// Clear the screen
@@ -210,7 +158,7 @@ int main(void)
 
 		// Bind our texture in Texture Unit 0
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, Texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
 		// Set our "myTextureSampler" sampler to use Texture Unit 0
 		glUniform1i(TextureID, 0);
 
@@ -231,7 +179,7 @@ int main(void)
 		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 		glVertexAttribPointer(
 			1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-			2,                                // size : U+V => 2
+			3,                                // size : U+V => 2
 			GL_FLOAT,                         // type
 			GL_FALSE,                         // normalized?
 			0,                                // stride
@@ -239,7 +187,7 @@ int main(void)
 		);
 
 		// Draw the triangle !
-		glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size()*3); // 12*3 indices starting at 0 -> 12 triangles
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
@@ -265,16 +213,17 @@ int main(void)
 }
 
 void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
-	int gridSize = board->cols / screen_width > board->rows / screen_height ? 2.0f / board->cols : 2.0f / board->rows;
+	float gridSize = board->cols / screen_width > board->rows / screen_height ? 2.0f / board->cols : 2.0f / board->rows;
 
 	for (int x = 0; x < board->cols; x++) {
 		for (int y = 0; y < board->rows; y++) {
+			
 			float px = -1 + x * gridSize;
 			float pxp = px + gridSize;
-			float py = -1 + x * gridSize;
-			float pyp = py + gridSize;
+			float py = 1 - y * gridSize;
+			float pyp = py - gridSize;
 
-			addTile(vec3(px, pyp, 0.0f), vec3(pxp, py, 0.0f), board->map[x][y], vertices, uvices);
+			addTile(vec3(px, py, 0.0f), vec3(pxp, pyp, 0.0f), board->map[y][x], vertices, uvices);
 		}
 	}
 }
@@ -284,12 +233,72 @@ void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices) {
 	vec3 bl = vec3(tl.x, br.y, 0);
 	vec3 tr = vec3(br.x, tl.y, 0);
 
+	float u_offset = 0;
+	float v_offset = 0;
+
+	switch (type){
+	case 0x1:
+	case 0x5:
+	case 0x9:
+	case 0xd:
+		u_offset = .25f;
+		break;
+	case 0x2:
+	case 0x6:
+	case 0xA:
+	case 0xE:
+		u_offset = .5f;
+		break;
+	case 0x3:
+	case 0x7:
+	case 0xb:
+	case 0xf:
+		u_offset = .75f;
+		break;
+	default:
+		u_offset = 0;
+	}
+
+	switch (type) {
+	case 0x4:
+	case 0x5:
+	case 0x6:
+	case 0x7:
+		v_offset = .25f;
+		break;
+	case 0x8:
+	case 0x9:
+	case 0xA:
+	case 0xB:
+		v_offset = .5f;
+		break;
+	case 0xC:
+	case 0xD:
+	case 0xE:
+	case 0xf:
+		v_offset = .75f;
+		break;
+	default:
+		v_offset = 0;
+	}
+
+	v_offset = 1 - v_offset;
+
 	vertices.push_back(tr);
 	vertices.push_back(tl);
 	vertices.push_back(bl);
 	vertices.push_back(bl);
 	vertices.push_back(br);
 	vertices.push_back(tr);
+
+
+	uvices.push_back(vec3(u_offset + 0.25f, v_offset - 0.25f, -1));
+	uvices.push_back(vec3(u_offset + 0.0f, v_offset - 0.25f, -1));
+	uvices.push_back(vec3(u_offset + 0.0f, v_offset - 0.0f, -1));
+
+	uvices.push_back(vec3(u_offset + 0.0f, v_offset - 0.0f, -1));
+	uvices.push_back(vec3(u_offset + 0.25f, v_offset - 0.0f, -1));
+	uvices.push_back(vec3(u_offset + 0.25f, v_offset - 0.25f, -1));
 
 
 }

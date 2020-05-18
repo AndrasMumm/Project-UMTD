@@ -3,7 +3,7 @@
 GameState::GameState()
 {
 	system("cd");
-	board.loadBoardFromFile("..\\..\\..\\Maps\\1.map");
+	board.loadBoardFromFile("..\\Maps\\1.map");
 
 }
 
