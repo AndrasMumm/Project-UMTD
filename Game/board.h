@@ -13,11 +13,15 @@ public:
 	Board();
 	~Board();
 	void loadBoardFromFile(string filename);
-private:
+
+	vvint map; // row mayor
 
 	int rows;
 	int cols;
 
+private:
+
+
 	
-	vvint map; // row mayor
+	
 };

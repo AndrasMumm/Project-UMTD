@@ -23,6 +23,14 @@ using namespace glm;
 #include <Game\gamestate.h>
 
 
+typedef vector<vec3> vvec3;
+
+void createBlancBoard(Board* board,vvec3& vertices, vvec3& uvices);
+void addTile(vec3& br, vec3& tl, int type, vvec3& vertices, vvec3& uvices);
+int screen_width = 1920 / 2;
+int screen_height = 1080 / 2;
+
+
 int main(void)
 {
 	// Initialise GLFW
@@ -40,7 +48,7 @@ int main(void)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-	window = glfwCreateWindow(1024, 768, "Tutorial 0 - Keyboard and Mouse", NULL, NULL);
+	window = glfwCreateWindow(screen_width, screen_height, "SpielEntkäferer", NULL, NULL);
 	if (window == NULL) {
 		fprintf(stderr, "Failed to open GLFW window. If you have an Intel GPU, they are not 3.3 compatible. Try the 2.1 version of the tutorials.\n");
 		getchar();
@@ -65,7 +73,7 @@ int main(void)
 
 	// Set the mouse at the center of the screen
 	glfwPollEvents();
-	glfwSetCursorPos(window, 1024 / 2, 768 / 2);
+	glfwSetCursorPos(window, screen_width / 2, screen_height / 2);
 
 	// Dark blue background
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -267,3 +275,26 @@ int main(void)
 	return 0;
 }
 
+
+
+void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
+
+	int gridSize = board->cols / screen_width > board->rows / screen_height ? 1.0f / board->cols : 1.0f / board->rows;
+	
+	for (int x = 0; x < board->cols; x++) {
+		
+		for (int y = 0; y < board->rows; y++) {
+
+
+		}
+
+	}
+
+
+}
+
+void addTile(vec3& br, vec3& tl, int type, vvec3& vertices, vvec3& uvices) {
+
+
+
+}
