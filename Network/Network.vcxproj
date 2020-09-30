@@ -21,16 +21,10 @@
   <ItemGroup>
     <ClInclude Include="asio.h" />
     <ClInclude Include="server.h" />
-    <ClInclude Include="Synchronization\SyncObject\syncFloat.h" />
-    <ClInclude Include="Synchronization\SyncObject\syncObject.h" />
-    <ClInclude Include="Synchronization\SyncObject\syncFloat.cpp" />
-    <ClInclude Include="Synchronization\syncManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="asio.cpp" />
     <ClCompile Include="server.cpp" />
-    <ClCompile Include="Synchronization\SyncObject\syncObject.cpp" />
-    <ClCompile Include="Synchronization\syncManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
