@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.757
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project UMTD", "Project UMTD\Project UMTD.vcxproj", "{BFED5C55-D227-4CB7-ACAE-433120F4EC57}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Network", "Network\Network.vcxproj", "{7675A5A6-88E9-4F37-A77E-B8F38C82BDFD}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEntkäferer", "GameDebugger\GameDebugger.vcxproj", "{A9E18EA9-95A3-4846-8D94-370319D447E3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestServer", "TestServer\TestServer.vcxproj", "{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{A9E18EA9-95A3-4846-8D94-370319D447E3}.Release|x64.Build.0 = Release|x64
 		{A9E18EA9-95A3-4846-8D94-370319D447E3}.Release|x86.ActiveCfg = Release|Win32
 		{A9E18EA9-95A3-4846-8D94-370319D447E3}.Release|x86.Build.0 = Release|Win32
+		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Debug|x64.ActiveCfg = Debug|x64
+		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Debug|x64.Build.0 = Debug|x64
+		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Debug|x86.ActiveCfg = Debug|Win32
+		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Debug|x86.Build.0 = Debug|Win32
+		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Release|x64.ActiveCfg = Release|x64
+		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Release|x64.Build.0 = Release|x64
+		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Release|x86.ActiveCfg = Release|Win32
+		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

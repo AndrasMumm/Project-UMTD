@@ -1,0 +1,6 @@
+C:/Coding/Project-UMTD/Dependencies/boost/safe_numerics/out/build/x64-Debug (default)/CMakeFiles/safe_numerics.dir
+C:/Coding/Project-UMTD/Dependencies/boost/safe_numerics/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
+C:/Coding/Project-UMTD/Dependencies/boost/safe_numerics/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
+C:/Coding/Project-UMTD/Dependencies/boost/safe_numerics/out/build/x64-Debug (default)/concept/CMakeFiles/edit_cache.dir
+C:/Coding/Project-UMTD/Dependencies/boost/safe_numerics/out/build/x64-Debug (default)/concept/CMakeFiles/concepts.dir
+C:/Coding/Project-UMTD/Dependencies/boost/safe_numerics/out/build/x64-Debug (default)/concept/CMakeFiles/rebuild_cache.dir

@@ -1,54 +1,80 @@
 ﻿#include "server.h"
 
-Session::Session(boost::asio::io_context& io_context) :
-	socket_(io_context),
-	input_deadline_(io_context),
-	non_empty_output_queue_(io_context),
-	output_deadline_(io_context)
+Server::Server(int port)
 {
-	input_deadline_.expires_at(steady_timer::time_point::max());
-	output_deadline_.expires_at(steady_timer::time_point::max());
-
-	// The non_empty_output_queue_ steady_timer is set to the maximum time
-	// point whenever the output queue is empty. This ensures that the output
-	// actor stays asleep until a message is put into the queue.
-	non_empty_output_queue_.expires_at(steady_timer::time_point::max());
+	_port = port;
+	_newConnectionThread = std::thread(&Server::ConnectionHandlerFunction);
 }
 
-tcp::socket& Session::socket()
+Server::~Server()
 {
-	return socket_;
+	Server::CleanupConnections();
+
+	delete _ioService;
+	delete _acceptor;
 }
 
-void Session::stop()
+void Server::CleanupConnections()
 {
+	for (auto exParticipant : _disconnectedParticipants)
+	{
+
+		exParticipant->connected = false;
+		if (exParticipant->handlerThread->joinable())
+		{
+			exParticipant->handlerThread->join();
+		}
+
+		delete exParticipant;
+	}
 }
 
-bool Session::stopped() const
+void Server::ConnectionHandlerFunction()
 {
-	return true;
+	_ioService = new io_service();
+	auto endpoint = ip::tcp::endpoint(ip::tcp::v6(), _port);
+	_acceptor = new tcp::acceptor(*_ioService, endpoint);
+
+	_idCounter = 0;
+	while (true)
+	{
+		tcp::socket* socket = new tcp::socket(_ioService);
+		_acceptor->accept(*socket);
+
+		Participant participant = Participant(socket, _idCounter++);
+		std::thread* t = new std::thread(&Server::HandleParticipant, &participant);
+		participant.handlerThread = t;
+
+		_participants.push_back(participant);
+	}
 }
 
-void Session::startRead()
+const char* ReadFromSocket(tcp::socket* socket, int* dataSize)
 {
+	boost::asio::streambuf buf;
+	boost::asio::read_until(socket, buf, 29);
+	const char* data = boost::asio::buffer_cast<const char*>(buf.data());
+	*dataSize = buf.size();
+	return data;
 }
 
-void Session::handleRead(const boost::system::error_code& ec, std::size_t n)
+void SentOverSocket(tcp::socket* socket, char* data, int dataSize)
 {
+	boost::asio::write(socket, boost::asio::buffer(data, dataSize));
+	//Delimiter
+	char delimiter = 29;
+	boost::asio::write(socket, boost::asio::buffer(&delimiter, 1));
 }
 
-void Session::awaitOutput()
+void Server::HandleParticipant(Participant* participant)
 {
-}
+	while (participant->connected)
+	{
+		int dataSize = 0;
+		const char* data = ReadFromSocket(participant->socket, &dataSize);
+		std::cout << "Received packet from Participant " << participant->id << ": \n" << std::string(data, dataSize);
+	}
 
-void Session::startWrite()
-{
-}
-
-void Session::handleWrite(const boost::system::error_code& ec)
-{
-}
-
-void Session::checkDeadline(steady_timer* deadline)
-{
+	//Marks for cleanup
+	_disconnectedParticipants.push_back(participant);
 }
