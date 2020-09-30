@@ -1,10 +1,15 @@
+/////////////
+// GLOBALS //
+/////////////
 cbuffer MatrixBuffer
 {
     matrix worldMatrix;
     matrix viewMatrix;
     matrix projectionMatrix;
 };
-
+//////////////
+// TYPEDEFS //
+//////////////
 struct VertexInputType
 {
     float4 position : POSITION;
@@ -16,8 +21,9 @@ struct PixelInputType
     float4 position : SV_POSITION;
     float4 color : COLOR;
 };
-
+////////////////////////////////////////////////////////////////////////////////
 // Vertex Shader
+////////////////////////////////////////////////////////////////////////////////
 PixelInputType ColorVertexShader(VertexInputType input)
 {
     PixelInputType output;

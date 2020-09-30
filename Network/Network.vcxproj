@@ -20,28 +20,18 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asio.h" />
-    <ClInclude Include="client.h" />
-    <ClInclude Include="connectionHandler.h" />
     <ClInclude Include="server.h" />
-    <ClInclude Include="Synchronization\SyncObject\syncFloat.h" />
-    <ClInclude Include="Synchronization\SyncObject\syncObject.h" />
-    <ClInclude Include="Synchronization\SyncObject\syncFloat.cpp" />
-    <ClInclude Include="Synchronization\syncManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="asio.cpp" />
-    <ClCompile Include="client.cpp" />
-    <ClCompile Include="connectionHandler.cpp" />
     <ClCompile Include="server.cpp" />
-    <ClCompile Include="Synchronization\SyncObject\syncObject.cpp" />
-    <ClCompile Include="Synchronization\syncManager.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{7675A5A6-88E9-4F37-A77E-B8F38C82BDFD}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Network</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -60,13 +50,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>

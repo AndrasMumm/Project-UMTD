@@ -1,5 +1,7 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: cameraclass.cpp
+////////////////////////////////////////////////////////////////////////////////
 #include "cameraclass.h"
-
 CameraClass::CameraClass()
 {
 	m_positionX = 0.0f;
@@ -20,7 +22,6 @@ CameraClass::CameraClass(const CameraClass& other)
 CameraClass::~CameraClass()
 {
 }
-
 void CameraClass::SetPosition(float x, float y, float z)
 {
 	m_positionX = x;
@@ -37,7 +38,6 @@ void CameraClass::SetRotation(float x, float y, float z)
 	m_rotationZ = z;
 	return;
 }
-
 XMFLOAT3 CameraClass::GetPosition()
 {
 	return XMFLOAT3(m_positionX, m_positionY, m_positionZ);
@@ -48,7 +48,6 @@ XMFLOAT3 CameraClass::GetRotation()
 {
 	return XMFLOAT3(m_rotationX, m_rotationY, m_rotationZ);
 }
-
 void CameraClass::Render()
 {
 	XMFLOAT3 up, position, lookAt;
@@ -101,7 +100,6 @@ void CameraClass::Render()
 
 	return;
 }
-
 void CameraClass::GetViewMatrix(XMMATRIX& viewMatrix)
 {
 	viewMatrix = m_viewMatrix;

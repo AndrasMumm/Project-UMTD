@@ -1,5 +1,7 @@
+////////////////////////////////////////////////////////////////////////////////
+// Filename: colorshaderclass.cpp
+////////////////////////////////////////////////////////////////////////////////
 #include "colorshaderclass.h"
-
 ColorShaderClass::ColorShaderClass()
 {
 	m_vertexShader = 0;
@@ -17,15 +19,14 @@ ColorShaderClass::ColorShaderClass(const ColorShaderClass& other)
 ColorShaderClass::~ColorShaderClass()
 {
 }
-
 bool ColorShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
 {
 	bool result;
-	WCHAR vs[] = L"../Rendering/colour.vs";
-	WCHAR ps[] = L"../Rendering/color.ps";
+	 WCHAR kackString2[] = L"../Shaders/color.vs";
+	 WCHAR kackString1[] = L"../Shaders/color.ps";
 
 	// Initialize the vertex and pixel shaders.
-	result = InitializeShader(device, hwnd, vs,	ps);
+	result = InitializeShader(device, hwnd, kackString2, kackString1);
 	if (!result)
 	{
 		return false;
@@ -33,7 +34,6 @@ bool ColorShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
 
 	return true;
 }
-
 void ColorShaderClass::Shutdown()
 {
 	// Shutdown the vertex and pixel shaders as well as the related objects.
@@ -41,7 +41,6 @@ void ColorShaderClass::Shutdown()
 
 	return;
 }
-
 bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount, XMMATRIX worldMatrix, XMMATRIX viewMatrix,
 	XMMATRIX projectionMatrix)
 {
@@ -60,7 +59,6 @@ bool ColorShaderClass::Render(ID3D11DeviceContext* deviceContext, int indexCount
 
 	return true;
 }
-
 bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* vsFilename, WCHAR* psFilename)
 {
 	HRESULT result;
@@ -113,7 +111,6 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 
 		return false;
 	}
-
 	// Create the vertex shader from the buffer.
 	result = device->CreateVertexShader(vertexShaderBuffer->GetBufferPointer(), vertexShaderBuffer->GetBufferSize(), NULL, &m_vertexShader);
 	if (FAILED(result))
@@ -127,10 +124,9 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 	{
 		return false;
 	}
-
 	// Create the vertex input layout description.
-// This setup needs to match the VertexType stucture in the ModelClass and in the shader.
-	polygonLayout[0].SemanticName = "POSITION";
+		// This setup needs to match the VertexType stucture in the ModelClass and in the shader.
+		polygonLayout[0].SemanticName = "POSITION";
 	polygonLayout[0].SemanticIndex = 0;
 	polygonLayout[0].Format = DXGI_FORMAT_R32G32B32_FLOAT;
 	polygonLayout[0].InputSlot = 0;
@@ -145,7 +141,6 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 	polygonLayout[1].AlignedByteOffset = D3D11_APPEND_ALIGNED_ELEMENT;
 	polygonLayout[1].InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
 	polygonLayout[1].InstanceDataStepRate = 0;
-
 	// Get a count of the elements in the layout.
 	numElements = sizeof(polygonLayout) / sizeof(polygonLayout[0]);
 
@@ -163,7 +158,6 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 
 	pixelShaderBuffer->Release();
 	pixelShaderBuffer = 0;
-
 	// Setup the description of the dynamic matrix constant buffer that is in the vertex shader.
 	matrixBufferDesc.Usage = D3D11_USAGE_DYNAMIC;
 	matrixBufferDesc.ByteWidth = sizeof(MatrixBufferType);
@@ -181,7 +175,6 @@ bool ColorShaderClass::InitializeShader(ID3D11Device* device, HWND hwnd, WCHAR* 
 
 	return true;
 }
-
 void ColorShaderClass::ShutdownShader()
 {
 	// Release the matrix constant buffer.
@@ -214,7 +207,6 @@ void ColorShaderClass::ShutdownShader()
 
 	return;
 }
-
 void ColorShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND hwnd, WCHAR* shaderFilename)
 {
 	char* compileErrors;
@@ -249,7 +241,6 @@ void ColorShaderClass::OutputShaderErrorMessage(ID3D10Blob* errorMessage, HWND h
 
 	return;
 }
-
 bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, XMMATRIX worldMatrix, XMMATRIX viewMatrix,
 	XMMATRIX projectionMatrix)
 {
@@ -257,13 +248,10 @@ bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, X
 	D3D11_MAPPED_SUBRESOURCE mappedResource;
 	MatrixBufferType* dataPtr;
 	unsigned int bufferNumber;
-
 	// Transpose the matrices to prepare them for the shader.
 	worldMatrix = XMMatrixTranspose(worldMatrix);
 	viewMatrix = XMMatrixTranspose(viewMatrix);
-	projectionMatrix = XMMatrixTranspose(projectionMatrix);
-
-	// Lock the constant buffer so it can be written to.
+	projectionMatrix = XMMatrixTranspose(projectionMatrix);// Lock the constant buffer so it can be written to.
 	result = deviceContext->Map(m_matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
 	if (FAILED(result))
 	{
@@ -280,7 +268,6 @@ bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, X
 
 	// Unlock the constant buffer.
 	deviceContext->Unmap(m_matrixBuffer, 0);
-
 	// Set the position of the constant buffer in the vertex shader.
 	bufferNumber = 0;
 
@@ -289,7 +276,6 @@ bool ColorShaderClass::SetShaderParameters(ID3D11DeviceContext* deviceContext, X
 
 	return true;
 }
-
 void ColorShaderClass::RenderShader(ID3D11DeviceContext* deviceContext, int indexCount)
 {
 	// Set the vertex input layout.

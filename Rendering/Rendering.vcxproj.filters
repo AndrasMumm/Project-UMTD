@@ -39,6 +39,9 @@
     <ClInclude Include="cameraclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="textureshaderclass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="textureclass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -68,11 +71,8 @@
     <ClCompile Include="cameraclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="texture.vs">
-      <Filter>Shaders</Filter>
-    </ClCompile>
-    <ClCompile Include="texture.ps">
-      <Filter>Shaders</Filter>
+    <ClCompile Include="textureshaderclass.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="textureclass.cpp">
       <Filter>Source Files</Filter>
@@ -85,5 +85,14 @@
     <None Include="colour.vs">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="texture.ps">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="texture.vs">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="stone01.tga" />
   </ItemGroup>
 </Project>
