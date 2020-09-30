@@ -166,6 +166,7 @@
     <ClInclude Include="inputclass.h" />
     <ClInclude Include="modelclass.h" />
     <ClInclude Include="systemclass.h" />
+    <ClInclude Include="textureclass.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cameraclass.cpp" />
@@ -175,7 +176,10 @@
     <ClCompile Include="inputclass.cpp" />
     <ClCompile Include="modelclass.cpp" />
     <ClCompile Include="renderingMain.h" />
+    <ClCompile Include="texture.ps" />
+    <ClCompile Include="texture.vs" />
     <ClCompile Include="systemclass.cpp" />
+    <ClCompile Include="textureclass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="color.ps" />
