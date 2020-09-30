@@ -65,12 +65,14 @@ const char* ReadFromSocket(tcp::socket* socket, int* dataSize)
 {
 	boost::asio::streambuf buf;
 	boost::asio::read_until(*socket, buf, char(PACKET_DELIMTER));
-	const char* data = boost::asio::buffer_cast<const char*>(buf.data());
 	*dataSize = buf.size();
+	char* data = new char[*dataSize];
+	memcpy(data, buf.data().data(), *dataSize);
+
 	return data;
 }
 
-void SentOverSocket(tcp::socket* socket, char* data, int dataSize)
+void SentOverSocket(tcp::socket* socket, const char* data, int dataSize)
 {
 	boost::asio::write(*socket, boost::asio::buffer(data, dataSize));
 	//Delimiter
@@ -84,7 +86,10 @@ void Server::HandleParticipant(Participant* participant)
 	{
 		int dataSize = 0;
 		const char* data = ReadFromSocket(participant->socket, &dataSize);
-		std::cout << "Received packet from Participant " << participant->id << ": \n" << std::string(data, dataSize);
+		std::cout << "Received packet from Participant " << participant->id << ": " << std::string(data, dataSize) << std::endl;
+		std::string answer = std::string("Please work");
+		SentOverSocket(participant->socket, answer.c_str(), answer.size());
+		delete[] data;
 	}
 
 	//Marks for cleanup
