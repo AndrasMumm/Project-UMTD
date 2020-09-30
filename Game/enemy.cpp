@@ -4,7 +4,7 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, int tile, int birth, int death) 
+Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, int tile, int birth, int death)
 {
 	//ToDo get synced from entity mgr
 
@@ -13,7 +13,7 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 
 	syncedData<float> sync_speed = syncedData<float>();
 	sync_speed.flag = true;
-	sync_speed.lastSyncedAt = 
+	sync_speed.lastSyncedAt = 0;
 	this->speed = syncedMirror->addSyncedData(sync_speed);
 
 }

@@ -1,7 +1,5 @@
-#pragma once
-
-
-#include "SyncedEntity.h"
+﻿#pragma once
+#include <Network/SyncedEntity.h>
 
 
 class Enemy
@@ -19,13 +17,13 @@ private:
 	float* shield;
 	float* regen;
 	float* progress;
-	
+
 	int* tile;
 
 
 	int* birth;
 	int* death;
-	
+
 	SyncedEntity* syncedMirror;
 
 };
