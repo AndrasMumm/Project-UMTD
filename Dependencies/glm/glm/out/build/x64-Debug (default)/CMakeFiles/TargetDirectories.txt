@@ -1,0 +1,2 @@
+C:/Coding/Project-UMTD/Dependencies/glm/glm/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
+C:/Coding/Project-UMTD/Dependencies/glm/glm/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
