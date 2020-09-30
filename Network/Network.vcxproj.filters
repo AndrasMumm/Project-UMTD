@@ -27,16 +27,10 @@
     <ClInclude Include="Synchronization\SyncObject\syncObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="client.h">
+    <ClInclude Include="asio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="server.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="connectionHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="asio.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,16 +41,10 @@
     <ClCompile Include="Synchronization\SyncObject\syncObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="client.cpp">
+    <ClCompile Include="asio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="server.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="connectionHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="asio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

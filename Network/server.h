@@ -1,50 +1,49 @@
 ﻿#pragma once
-#include "connectionHandler.h"
-#include "asio.h"
+#include <iostream>
+#include <boost/asio.hpp>
+#include <boost/asio/ip/tcp.hpp>
+using namespace boost::asio;
+using ip::tcp;
 
-using boost::asio::steady_timer;
-using boost::asio::ip::tcp;
+#define DEFAULT_GAME_PORT 1234
 
 class Participant
 {
 public:
-	virtual ~Participant();
-	virtual void deliver(const std::string& msg) = 0;
+	tcp::socket* socket;
+	int id;
+	std::thread* handlerThread;
+	bool connected;
+	Participant(tcp::socket* s, int i) : socket(s) {
+		id = id;
+		connected = true;
+	};
+	~Participant()
+	{
+		delete socket;
+		delete handlerThread;
+	}
 };
 
-class Session : public ConnectionHandler, Participant, boost::enable_shared_from_this<Session>
-{
+class Server {
 private:
-	//Private vars
-	tcp::socket socket_;
-	std::string input_buffer_;
-	steady_timer input_deadline_;
-	std::deque<std::string> output_queue_;
-	steady_timer non_empty_output_queue_;
-	steady_timer output_deadline_;
+	//TCP server
+	io_service* _ioService;
+	tcp::acceptor* _acceptor;
+	int _port;
+	int _idCounter;
 
+	//Handling new connections and killing old ones
+	std::thread _newConnectionThread;
+	void ConnectionHandlerFunction();
+	void CleanupConnections();
+
+	//Participants
+	std::vector<Participant> _participants;
+	std::vector<Participant*> _disconnectedParticipants;
+
+	void HandleParticipant(Participant* participant);
 public:
-	//Public methods
-	Session(boost::asio::io_context& io_context);
-	tcp::socket& socket();
-
-	void init();
-
-private:
-	//Private methods
-
-	void stop();
-	bool stopped() const;
-	void startRead();
-	void handleRead(const boost::system::error_code& ec, std::size_t n);
-	void awaitOutput();
-
-	void startWrite();
-	void handleWrite(const boost::system::error_code& ec);
-
-	void checkDeadline(steady_timer* deadline);
-};
-
-class Server : public ConnectionHandler
-{
+	Server(int port = DEFAULT_GAME_PORT);
+	~Server();
 };
