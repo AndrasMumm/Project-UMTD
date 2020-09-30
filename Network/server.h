@@ -14,8 +14,9 @@ public:
 	int id;
 	std::thread* handlerThread;
 	bool connected;
-	Participant(tcp::socket* s, int i) : socket(s) {
-		id = id;
+	Participant(tcp::socket* s, int i) {
+		socket = s;
+		id = i;
 		connected = true;
 	};
 	~Participant()
@@ -43,7 +44,7 @@ private:
 
 public:
 	//Participants
-	std::vector<Participant> participants;
+	std::vector<Participant*> participants;
 	std::vector<Participant*> disconnectedParticipants;
 	void HandleParticipant(Participant* participant);
 	void ConnectionHandlerFunction();
