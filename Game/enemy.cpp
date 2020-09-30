@@ -13,6 +13,7 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 
 	syncedData<float> sync_speed = syncedData<float>();
 	sync_speed.flag = true;
+	sync_speed.lastSyncedAt = 
 	this->speed = syncedMirror->addSyncedData(sync_speed);
 
 }
