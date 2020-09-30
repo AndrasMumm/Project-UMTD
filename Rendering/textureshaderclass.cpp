@@ -28,8 +28,8 @@ bool TextureShaderClass::Initialize(ID3D11Device* device, HWND hwnd)
 {
 	bool result;
 	// Initialize the vertex and pixel shaders.
-	WCHAR vs[] = L"../Shaders/texture.vs";
-	WCHAR ps[] = L"../Shaders/texture.ps";
+	WCHAR vs[] = L"..\\Data\\texture.vs";
+	WCHAR ps[] = L"..\\Data\\texture.ps";
 	result = InitializeShader(device, hwnd, vs, ps);
 	if (!result)
 	{
