@@ -23,6 +23,11 @@ public:
 		delete socket;
 		delete handlerThread;
 	}
+
+	bool operator==(const Participant& b)
+	{
+		return id == b.id;
+	}
 };
 
 class Server {
@@ -35,15 +40,15 @@ private:
 
 	//Handling new connections and killing old ones
 	std::thread _newConnectionThread;
+
+public:
+	//Participants
+	std::vector<Participant> participants;
+	std::vector<Participant*> disconnectedParticipants;
+	void HandleParticipant(Participant* participant);
 	void ConnectionHandlerFunction();
 	void CleanupConnections();
 
-	//Participants
-	std::vector<Participant> _participants;
-	std::vector<Participant*> _disconnectedParticipants;
-
-	void HandleParticipant(Participant* participant);
-public:
 	Server(int port = DEFAULT_GAME_PORT);
 	~Server();
 };

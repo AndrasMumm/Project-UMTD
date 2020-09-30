@@ -92,9 +92,4 @@
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\stone01.tga">
-      <Filter>Shaders</Filter>
-    </Image>
-  </ItemGroup>
 </Project>

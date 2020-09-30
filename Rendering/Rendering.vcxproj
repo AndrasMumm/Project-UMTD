@@ -197,13 +197,6 @@
       <DeploymentContent>true</DeploymentContent>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\..\..\stone01.tga">
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-      <DeploymentContent>true</DeploymentContent>
-    </Image>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

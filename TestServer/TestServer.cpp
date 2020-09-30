@@ -6,7 +6,7 @@
 
 int main()
 {
-	Server server = Server(1234);
+	Server server(1234);
 
 	while (true)
 	{
