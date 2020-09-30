@@ -124,7 +124,7 @@ bool TextureClass::LoadTarga(char const* filename, int& height, int& width)
 	error = fopen_s(&filePtr, filename, "rb");
 	if (error != 0)
 	{
-		printf("fopen"+ error);
+		
 		return false;
 	}
 
