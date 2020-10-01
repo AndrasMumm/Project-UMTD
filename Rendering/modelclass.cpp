@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////////////////////
+﻿////////////////////////////////////////////////////////////////////////////////
 // Filename: modelclass.cpp
 ////////////////////////////////////////////////////////////////////////////////
 #include "modelclass.h"
@@ -20,7 +20,7 @@ ModelClass::ModelClass(const ModelClass& other)
 ModelClass::~ModelClass()
 {
 }
-bool ModelClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext,  char const* modelFilename, char const* textureFilename)
+bool ModelClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceContext, char const* modelFilename, char const* textureFilename)
 {
 	bool result;
 
@@ -30,7 +30,7 @@ bool ModelClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCon
 	if (!result)
 	{
 		return false;
-		
+
 	}
 	// Load the texture for this model.
 	result = LoadTexture(device, deviceContext, textureFilename);
@@ -196,7 +196,7 @@ bool ModelClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceCo
 	m_Texture = new TextureClass;
 	if (!m_Texture)
 	{
-		
+
 		return false;
 	}
 
@@ -204,7 +204,7 @@ bool ModelClass::LoadTexture(ID3D11Device* device, ID3D11DeviceContext* deviceCo
 	result = m_Texture->Initialize(device, deviceContext, filename);
 	if (!result)
 	{
-		
+
 		return false;
 	}
 

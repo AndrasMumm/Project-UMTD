@@ -1,11 +1,14 @@
 ﻿#pragma once
 
 #include "packet.h"
+#include <map>
 
+
+typedef void (*PacketHandlerFunction)(Packet, int);
 class PacketMgr
 {
 public:
-	PacketMgr& getInstance()
+	static PacketMgr& GetInstance()
 	{
 		static PacketMgr instance;
 		return instance;
@@ -13,9 +16,11 @@ public:
 
 
 private:
-	PacketMgr() {}
+	PacketMgr();
 
+	std::multimap<short, PacketHandlerFunction> callbacks;
 public:
-	void send(Packet& packet, int recipient = -1);
-	void handle(Packet& packet, int sender);
+	void RegisterCallback(short opcode, PacketHandlerFunction callback);
+	void Send(Packet& packet, int recipient = -1);
+	void Handle(Packet& packet, int sender);
 };
