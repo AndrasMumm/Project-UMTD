@@ -30,6 +30,9 @@
     <ClInclude Include="Packets\packet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EntityMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="asio.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SyncedEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityMgr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

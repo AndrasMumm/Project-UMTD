@@ -3,6 +3,8 @@
 #include <vector>
 #include <Network/SyncedEntity.h>
 
+#define TICK Clock::getInstance().getTick()
+
 class Clock
 {
 public:

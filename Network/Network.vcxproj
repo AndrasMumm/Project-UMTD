@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asio.h" />
+    <ClInclude Include="EntityMgr.h" />
     <ClInclude Include="Packets\packet.h" />
     <ClInclude Include="Packets\PacketMgr.h" />
     <ClInclude Include="server.h" />
@@ -27,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="asio.cpp" />
+    <ClCompile Include="EntityMgr.cpp" />
     <ClCompile Include="server.cpp" />
     <ClCompile Include="SyncedEntity.cpp" />
   </ItemGroup>
