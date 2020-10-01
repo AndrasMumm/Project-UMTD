@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+class GameEntity;
 class GameEvent
 {
 public:

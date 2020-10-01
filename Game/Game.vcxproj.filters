@@ -39,13 +39,16 @@
     <ClInclude Include="Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EventSystem\Event.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="gameentity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventMgr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\GameEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EventSystem\EventList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

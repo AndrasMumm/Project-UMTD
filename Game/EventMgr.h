@@ -1,7 +1,8 @@
 ﻿#pragma once
 #include <map>
 #include <Game\EventSystem\GameEvent.h>
-#include <Game\gameentity.h>
+
+class GameEntity;
 class EventMgr
 {
 private:

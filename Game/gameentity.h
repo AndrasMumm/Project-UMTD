@@ -4,5 +4,6 @@
 
 class GameEntity : public SyncedEntity
 {
+public:
 	EventMgr eventManager;
 };
