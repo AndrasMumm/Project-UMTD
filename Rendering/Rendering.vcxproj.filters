@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{1be7a24f-c62b-4a2f-9552-99cd7532a102}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="systemclass.h">
@@ -77,20 +74,9 @@
     <ClCompile Include="textureclass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="color.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="colour.vs">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="texture.ps">
-      <Filter>Shaders</Filter>
-    </None>
-    <None Include="texture.vs">
-      <Filter>Shaders</Filter>
-    </None>
+    <ClCompile Include="load.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="stone01.tga" />

@@ -1,6 +1,4 @@
-#pragma once
-
-
+﻿#pragma once
 #include <Network/SyncedEntity.h>
 
 
@@ -19,13 +17,13 @@ private:
 	float* shield;
 	float* regen;
 	float* progress;
-	
+
 	int* tile;
 
 
 	int* birth;
 	int* death;
-	
+
 	SyncedEntity* syncedMirror;
 
 };
