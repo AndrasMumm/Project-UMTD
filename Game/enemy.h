@@ -1,7 +1,7 @@
 #pragma once
 
 
-#include "SyncedEntity.h"
+#include <Network/SyncedEntity.h>
 
 
 class Enemy

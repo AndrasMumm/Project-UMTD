@@ -20,11 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asio.h" />
+    <ClInclude Include="EntityMgr.h" />
     <ClInclude Include="server.h" />
+    <ClInclude Include="SyncedEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="asio.cpp" />
+    <ClCompile Include="EntityMgr.cpp" />
     <ClCompile Include="server.cpp" />
+    <ClCompile Include="SyncedEntity.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
