@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <Network/SyncedEntity.h>
-
+#include <Network/EntityMgr.h>
+#include <Game/clock.h>
 
 class Enemy
 {

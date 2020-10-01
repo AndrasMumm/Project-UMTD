@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />
+    <ClInclude Include="clock.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="gamestate.h" />
     <ClInclude Include="helpingHeader.h" />
@@ -103,6 +104,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="board.cpp" />
+    <ClCompile Include="clock.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="gamestate.cpp" />
   </ItemGroup>
