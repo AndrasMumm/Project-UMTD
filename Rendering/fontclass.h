@@ -43,14 +43,14 @@ public:
 	FontClass(const FontClass&);
 	~FontClass();
 
-	bool Initialize(ID3D11Device*, ID3D11DeviceContext*, char*, char const*);
+	bool Initialize(ID3D11Device*, ID3D11DeviceContext*, char const*, char const*);
 	void Shutdown();
 
 	ID3D11ShaderResourceView* GetTexture();
-	void BuildVertexArray(void*, char*, float, float);
+	void BuildVertexArray(void*, char const*, float, float);
 
 private:
-	bool LoadFontData(char*);
+	bool LoadFontData(char const*);
 	void ReleaseFontData();
 	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*, char const*);
 	void ReleaseTexture();
