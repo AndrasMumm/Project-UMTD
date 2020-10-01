@@ -45,6 +45,9 @@
     <ClInclude Include="Packets\opcodes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Packets\Sync\SyncDataPacket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="asio.cpp">
@@ -63,6 +66,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EntityMgr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Packets\Sync\SyncDataPacket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

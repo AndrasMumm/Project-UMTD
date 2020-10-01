@@ -20,6 +20,7 @@
     <ClInclude Include="Packets\Testing\Ping.h" />
     <ClInclude Include="Packets\Testing\Pong.h" />
     <ClInclude Include="server.h" />
+    <ClInclude Include="Packets\Sync\SyncDataPacket.h" />
     <ClInclude Include="SyncedEntity.h" />
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +29,7 @@
     <ClCompile Include="EntityMgr.cpp" />
     <ClCompile Include="Packets\PacketMgr.cpp" />
     <ClCompile Include="server.cpp" />
+    <ClCompile Include="Packets\Sync\SyncDataPacket.cpp" />
     <ClCompile Include="SyncedEntity.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
