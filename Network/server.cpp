@@ -1,14 +1,12 @@
 ﻿#include "server.h"
 #include <algorithm>
 #include <boost/lexical_cast.hpp>
+#include "Packets/packet.h"
+#include "Packets/PacketMgr.h"
 
-Server::Server(int port)
+Server::Server()
 {
-	_port = port;
-	_newConnectionThread = std::thread([&](Server* server)
-		{
-			server->ConnectionHandlerFunction();
-		}, this);
+
 }
 
 Server::~Server()
@@ -19,11 +17,45 @@ Server::~Server()
 	delete _acceptor;
 }
 
+bool Server::IsStarted()
+{
+	return _started;
+}
+
+void Server::Start(int port)
+{
+	_port = port;
+	_newConnectionThread = std::thread([&](Server* server)
+		{
+			server->ConnectionHandlerFunction();
+		}, this);
+
+	_started = true;
+}
+
+void Server::Stop()
+{
+	//TODO:
+	_started = false;
+}
+
+
+Participant* Server::GetParticipant(int id)
+{
+	auto it = participants.find(id);
+	if (participants.end() == it)
+	{
+		std::cout << "ERROR: There is no participant with id " << id << std::endl;
+		return nullptr;
+	}
+
+	return participants.at(id);
+}
+
 void Server::CleanupConnections()
 {
 	for (auto exParticipant : disconnectedParticipants)
 	{
-
 		exParticipant->connected = false;
 		if (exParticipant->handlerThread->joinable())
 		{
@@ -42,6 +74,8 @@ void Server::ConnectionHandlerFunction()
 	_acceptor = new tcp::acceptor(*_ioService, endpoint);
 	std::cout << "Listenting to port " << _port << " on IP " << boost::lexical_cast<std::string>(ip) << std::endl;
 
+	participants = std::unordered_map<int, Participant*>();
+
 	_idCounter = 0;
 	while (true)
 	{
@@ -55,13 +89,13 @@ void Server::ConnectionHandlerFunction()
 			server->HandleParticipant(participant);
 			}, this);
 		participant->handlerThread = t;
-		participants.push_back(participant);
+		participants.at(pID) = participant;
 	}
 }
 
 //#define PACKET_DELIMTER 29
 #define PACKET_DELIMTER 'A'
-const char* ReadFromSocket(tcp::socket* socket, int* dataSize)
+const char* Server::ReadFromSocket(tcp::socket* socket, int* dataSize)
 {
 	boost::asio::streambuf buf;
 	boost::asio::read_until(*socket, buf, char(PACKET_DELIMTER));
@@ -72,7 +106,7 @@ const char* ReadFromSocket(tcp::socket* socket, int* dataSize)
 	return data;
 }
 
-void SentOverSocket(tcp::socket* socket, const char* data, int dataSize)
+void Server::SendOverSocket(tcp::socket* socket, const char* data, int dataSize)
 {
 	boost::asio::write(*socket, boost::asio::buffer(data, dataSize));
 	//Delimiter
@@ -86,17 +120,12 @@ void Server::HandleParticipant(Participant* participant)
 	{
 		int dataSize = 0;
 		const char* data = ReadFromSocket(participant->socket, &dataSize);
-		std::cout << "Received packet from Participant " << participant->id << ": " << std::string(data, dataSize) << std::endl;
-		std::string answer = std::string("Please work");
-		SentOverSocket(participant->socket, answer.c_str(), answer.size());
+		Packet p = Packet(data, dataSize);
+		PacketMgr::GetInstance().Handle(p, participant->id);
 		delete[] data;
 	}
 
 	//Marks for cleanup
 	disconnectedParticipants.push_back(participant);
-	auto entry = std::find(participants.begin(), participants.end(), participant);
-	if (entry != participants.end())
-	{
-		participants.erase(entry);
-	}
+	auto entry = participants.erase(participant->id);
 }

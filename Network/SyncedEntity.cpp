@@ -1,4 +1,4 @@
-#include "SyncedEntity.h"
+﻿#include "SyncedEntity.h"
 
 using namespace std;
 
