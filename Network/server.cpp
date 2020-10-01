@@ -3,10 +3,13 @@
 #include <boost/lexical_cast.hpp>
 #include "Packets/packet.h"
 #include "Packets/PacketMgr.h"
+#include "Packets/Testing/Ping.h"
+#include "Packets/Testing/Pong.h"
 
 Server::Server()
 {
-
+	PacketHandlerFunction pingPacketHandler = &Server::PingPacketHandler;
+	PacketMgr::GetInstance().RegisterCallback(PING_OPCODE, pingPacketHandler);
 }
 
 Server::~Server()
@@ -89,17 +92,19 @@ void Server::ConnectionHandlerFunction()
 			server->HandleParticipant(participant);
 			}, this);
 		participant->handlerThread = t;
-		participants.at(pID) = participant;
+		participants.insert({ pID, participant });
 	}
 }
 
-//#define PACKET_DELIMTER 29
-#define PACKET_DELIMTER 'A'
-const char* Server::ReadFromSocket(tcp::socket* socket, int* dataSize)
+const char* Server::ReadFromSocket(tcp::socket* socket, int* dataSize, boost::system::error_code& ec)
 {
 	boost::asio::streambuf buf;
-	boost::asio::read_until(*socket, buf, char(PACKET_DELIMTER));
-	*dataSize = buf.size();
+	boost::asio::read_until(*socket, buf, char(PACKET_DELIMTER), ec);
+	if ((boost::asio::error::eof == ec) || (boost::asio::error::connection_reset == ec))
+	{
+		return nullptr;
+	}
+	*dataSize = buf.size() - 1; //-1 because of delimiter
 	char* data = new char[*dataSize];
 	memcpy(data, buf.data().data(), *dataSize);
 
@@ -114,18 +119,45 @@ void Server::SendOverSocket(tcp::socket* socket, const char* data, int dataSize)
 	boost::asio::write(*socket, boost::asio::buffer(&delimiter, 1));
 }
 
+void Server::Send(int participantID, Packet* p)
+{
+	int dSize = 0;
+	char* data = p->GetRaw(&dSize);
+	SendOverSocket(GetParticipant(participantID)->socket, data, dSize);
+	delete[] data;
+}
+
 void Server::HandleParticipant(Participant* participant)
 {
 	while (participant->connected)
 	{
 		int dataSize = 0;
-		const char* data = ReadFromSocket(participant->socket, &dataSize);
-		Packet p = Packet(data, dataSize);
+		boost::system::error_code ec;
+		const char* data = ReadFromSocket(participant->socket, &dataSize, ec);
+		if ((boost::asio::error::eof == ec) || (boost::asio::error::connection_reset == ec))
+		{
+			std::cout << "Participant " << participant->id << " disconnected!" << std::endl;
+			break;
+		}
+		//Received packet, forwarding it to packet handler
+		Packet* p = new Packet(data, dataSize);
 		PacketMgr::GetInstance().Handle(p, participant->id);
+		//Cleanup
+		delete p;
 		delete[] data;
 	}
 
 	//Marks for cleanup
 	disconnectedParticipants.push_back(participant);
+	//removing participant
 	auto entry = participants.erase(participant->id);
+}
+
+
+void Server::PingPacketHandler(Packet* p, int sender)
+{
+
+	Ping ping = Ping(p);
+	Pong pong = Pong(ping.GetMsg());
+	Server::GetInstance().Send(sender, &pong);
 }

@@ -108,6 +108,14 @@
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="gamestate.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Network\Network.vcxproj">
+      <Project>{7675a5a6-88e9-4f37-a77e-b8f38c82bdfd}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Rendering\Rendering.vcxproj">
+      <Project>{f04e0e6b-80b8-4a42-9a9b-aea2487e5bf3}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

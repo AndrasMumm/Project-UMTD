@@ -14,6 +14,7 @@
     <ClInclude Include="asio.h" />
     <ClInclude Include="client.h" />
     <ClInclude Include="EntityMgr.h" />
+    <ClInclude Include="Packets\opcodes.h" />
     <ClInclude Include="Packets\packet.h" />
     <ClInclude Include="Packets\PacketMgr.h" />
     <ClInclude Include="Packets\Testing\Ping.h" />
