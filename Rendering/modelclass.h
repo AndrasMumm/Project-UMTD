@@ -55,7 +55,7 @@ private:
 	void RenderBuffers(ID3D11DeviceContext*);
 	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*,  char const*);
 	void ReleaseTexture();
-	bool LoadModel(char*);
+	bool LoadModel(char const*);
 	void ReleaseModel();
 
 private:

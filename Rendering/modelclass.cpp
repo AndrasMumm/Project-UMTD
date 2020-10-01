@@ -25,7 +25,12 @@ bool ModelClass::Initialize(ID3D11Device* device, ID3D11DeviceContext* deviceCon
 {
 	bool result;
 
-
+	// Load in the model data,
+	result = LoadModel(modelFilename);
+	if (!result)
+	{
+		return false;
+	}
 	// Initialize the vertex and index buffers.
 	result = InitializeBuffers(device);
 	if (!result)
@@ -222,7 +227,7 @@ void ModelClass::ReleaseTexture()
 
 	return;
 }
-bool ModelClass::LoadModel(char* filename)
+bool ModelClass::LoadModel(char const* filename)
 {
 	ifstream fin;
 	char input;

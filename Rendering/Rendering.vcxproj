@@ -110,7 +110,6 @@
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
-    <ClCompile Include="load.cpp" />
     <ClCompile Include="modelclass.cpp" />
     <ClCompile Include="renderingMain.h" />
     <ClCompile Include="systemclass.cpp" />
