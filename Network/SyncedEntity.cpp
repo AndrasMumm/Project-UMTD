@@ -1,5 +1,5 @@
 ﻿#include "SyncedEntity.h"
-
+#include "EntityMgr.h"
 using namespace std;
 
 
@@ -61,11 +61,3 @@ void SyncedEntity::clearAllFlags()
 //{
 //}
 
-SyncedEntity& SyncedEntity::operator=(const SyncedEntity& in)
-{
-	auto a = SyncedEntity(in.entityKey);
-	return a;
-
-
-
-}

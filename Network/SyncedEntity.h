@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <string>
-#include "EntityMgr.h"
 
 template <typename T>  class syncedData{
 
@@ -36,7 +35,7 @@ public:
 
 
 	SyncedEntity(const SyncedEntity&) = default;
-	SyncedEntity& operator=(const SyncedEntity&);
+	SyncedEntity& operator=(const SyncedEntity&) = default;
 
 private:
 
