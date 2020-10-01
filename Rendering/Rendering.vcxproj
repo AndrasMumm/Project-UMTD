@@ -175,27 +175,12 @@
     <ClCompile Include="d3dclass.cpp" />
     <ClCompile Include="graphicsclass.cpp" />
     <ClCompile Include="inputclass.cpp" />
+    <ClCompile Include="load.cpp" />
     <ClCompile Include="modelclass.cpp" />
     <ClCompile Include="renderingMain.h" />
-    <None Include="texture.ps">
-      <FileType>Document</FileType>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="texture.vs">
-      <FileType>Document</FileType>
-      <DeploymentContent>true</DeploymentContent>
-    </None>
     <ClCompile Include="systemclass.cpp" />
     <ClCompile Include="textureclass.cpp" />
     <ClCompile Include="textureshaderclass.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="color.ps">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
-    <None Include="colour.vs">
-      <DeploymentContent>true</DeploymentContent>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="stone01.tga">
