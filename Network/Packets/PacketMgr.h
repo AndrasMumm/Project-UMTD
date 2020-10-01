@@ -15,10 +15,11 @@ public:
 
 private:
 	PacketMgr();
-
+	std::vector<std::pair<Packet*, int>> packetQueue;
 	std::multimap<short, PacketHandlerFunction> callbacks;
 public:
 	void RegisterCallback(short opcode, PacketHandlerFunction callback);
 	void Send(Packet* packet, int recipient = -1);
 	void Handle(Packet* packet, int sender);
+	void Process();
 };

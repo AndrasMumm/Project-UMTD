@@ -24,13 +24,28 @@ void PacketMgr::Send(Packet* packet, int recipient)
 
 void PacketMgr::Handle(Packet* packet, int sender)
 {
-	auto opcode = packet->GetOpcode();
-	std::cout << "Received packet with opcode " << opcode << " from Participant " << sender << std::endl;
-	auto handlers = callbacks.find(opcode);
-	auto handlerCount = callbacks.count(opcode);
-	for (int i = 0; i < handlerCount; ++i)
+	std::cout << "Received packet with opcode " << packet->GetOpcode() << " from Participant " << sender << std::endl;
+	packetQueue.push_back({ packet, sender });
+}
+
+void PacketMgr::Process()
+{
+	for (auto entry : packetQueue)
 	{
-		(*handlers->second)(packet, sender);
-		handlers++;
+		Packet* packet = entry.first;
+		int sender = entry.second;
+		auto opcode = packet->GetOpcode();
+		auto handlers = callbacks.find(opcode);
+		auto handlerCount = callbacks.count(opcode);
+		for (int i = 0; i < handlerCount; ++i)
+		{
+			(*handlers->second)(packet, sender);
+			handlers++;
+		}
+
+		//Cleanup
+		delete packet;
 	}
+
+	packetQueue.clear();
 }
