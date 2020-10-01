@@ -213,10 +213,10 @@ int main(void)
 }
 
 void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
-	float gridSize = board->cols / screen_width > board->rows / screen_height ? 2.0f / board->cols : 2.0f / board->rows;
+	float gridSize = board->width / screen_width > board->height / screen_height ? 2.0f / board->width : 2.0f / board->height;
 
-	for (int x = 0; x < board->cols; x++) {
-		for (int y = 0; y < board->rows; y++) {
+	for (int x = 0; x < board->width; x++) {
+		for (int y = 0; y < board->height; y++) {
 			
 			float px = -1 + x * gridSize;
 			float pxp = px + gridSize;

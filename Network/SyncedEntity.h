@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include "EntityMgr.h"
 
 template <typename T>  class syncedData{
 
@@ -18,8 +19,8 @@ public:
 class SyncedEntity {
 	
 public:
-	SyncedEntity(int entityKey);
-	
+	SyncedEntity();
+	~SyncedEntity();
 	int* addSyncedData(syncedData<int>&);
 	float* addSyncedData(syncedData<float>&);
 	std::string* addSyncedData(syncedData<std::string>&);

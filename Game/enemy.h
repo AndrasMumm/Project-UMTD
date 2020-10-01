@@ -3,12 +3,11 @@
 #include <Network/EntityMgr.h>
 #include <Game/clock.h>
 
-class Enemy
+class Enemy : public SyncedEntity
 {
 public:
 	Enemy();
 	Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, int tile, int birth, int death);
-	~Enemy();
 
 private:
 	float* speed;
@@ -24,7 +23,5 @@ private:
 
 	int* birth;
 	int* death;
-
-	SyncedEntity* syncedMirror;
 
 };
