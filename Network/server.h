@@ -2,6 +2,8 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <boost/asio/ip/tcp.hpp>
+#include <unordered_map>
+
 using namespace boost::asio;
 using ip::tcp;
 
@@ -32,6 +34,13 @@ public:
 };
 
 class Server {
+public:
+	static Server& GetInstance()
+	{
+		static Server server;
+		return server;
+	}
+
 private:
 	//TCP server
 	io_service* _ioService;
@@ -39,17 +48,28 @@ private:
 	int _port;
 	int _idCounter;
 
-	//Handling new connections and killing old ones
+	//Handling new connections
 	std::thread _newConnectionThread;
+
+	bool _started;
+
+	Server();
+	~Server();
 
 public:
 	//Participants
-	std::vector<Participant*> participants;
+	std::unordered_map<int, Participant*> participants;
 	std::vector<Participant*> disconnectedParticipants;
+
+	Participant* GetParticipant(int id);
 	void HandleParticipant(Participant* participant);
 	void ConnectionHandlerFunction();
 	void CleanupConnections();
 
-	Server(int port = DEFAULT_GAME_PORT);
-	~Server();
+	const char* ReadFromSocket(tcp::socket* socket, int* dataSize);
+	void SendOverSocket(tcp::socket* socket, const char* data, int dataSize);
+
+	bool IsStarted();
+	void Start(int port = DEFAULT_GAME_PORT);
+	void Stop();
 };

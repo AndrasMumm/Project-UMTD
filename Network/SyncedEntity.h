@@ -18,7 +18,7 @@ public:
 class SyncedEntity {
 	
 public:
-	SyncedEntity();
+	SyncedEntity(int entityKey);
 	int* addSyncedData(syncedData<int>&);
 	float* addSyncedData(syncedData<float>&);
 	std::string* addSyncedData(syncedData<std::string>&); 
@@ -28,12 +28,12 @@ public:
 	void flagString(int id);
 
 	void clearAllFlags();
-
-	private:
-	
+	const int entityKey;
 	bool activelySynced = false;
-	int entityKey = -1;
 	int syncFreq = 0;
+	
+private:
+
 	
 	std::vector<syncedData<int>> syncedInts;
 	std::vector<syncedData<float>> syncedFloat;

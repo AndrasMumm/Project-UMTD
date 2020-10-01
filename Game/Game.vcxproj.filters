@@ -33,7 +33,7 @@
     <ClInclude Include="helpingHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SyncedEntity.h">
+    <ClInclude Include="clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +47,7 @@
     <ClCompile Include="gamestate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SyncedEntity.cpp">
+    <ClCompile Include="clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

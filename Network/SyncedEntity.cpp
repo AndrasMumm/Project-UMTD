@@ -1,15 +1,15 @@
-#include "SyncedEntity.h"
+﻿#include "SyncedEntity.h"
 
 using namespace std;
 
 
-SyncedEntity::SyncedEntity()
+SyncedEntity::SyncedEntity(int entityKey) :entityKey(entityKey)
 {
 }
 
 int* SyncedEntity::addSyncedData(syncedData<int>& data)
 {
-	this->syncedInts.push_back(data);
+	syncedInts.push_back(data);
 	return &(syncedInts.back().value);
 }
 float* SyncedEntity::addSyncedData(syncedData<float>& data)
@@ -30,12 +30,12 @@ void SyncedEntity::flagInt(int id)
 
 void SyncedEntity::flagFloat(int id)
 {
-	syncedInts.at(id).flag = true;
+	syncedFloat.at(id).flag = true;
 }
 
 void SyncedEntity::flagString(int id)
 {
-	syncedInts.at(id).flag = true;
+	syncedString.at(id).flag = true;
 }
 
 void SyncedEntity::clearAllFlags()
