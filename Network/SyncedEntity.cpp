@@ -1,10 +1,13 @@
 ﻿#include "SyncedEntity.h"
-
+#include "EntityMgr.h"
 using namespace std;
 
 
-SyncedEntity::SyncedEntity(int entityKey) :entityKey(entityKey)
+SyncedEntity::SyncedEntity() : entityKey(EntityMgr::getInstance().addSyncedEntity(this)) { }
+
+SyncedEntity::~SyncedEntity()
 {
+	EntityMgr::getInstance().removeSyncedEntity(this);
 }
 
 int* SyncedEntity::addSyncedData(syncedData<int>& data)
@@ -58,11 +61,3 @@ void SyncedEntity::clearAllFlags()
 //{
 //}
 
-SyncedEntity& SyncedEntity::operator=(const SyncedEntity& in)
-{
-	auto a = SyncedEntity(in.entityKey);
-	return a;
-
-
-
-}

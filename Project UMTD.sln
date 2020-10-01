@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEntkäferer", "GameDebu
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestServer", "TestServer\TestServer.vcxproj", "{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestClient", "TestClient\TestClient.vcxproj", "{39650472-DC4B-439C-99DB-77D5F0D11C29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Release|x64.ActiveCfg = Release|x64
 		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Release|x64.Build.0 = Release|x64
 		{5CBE221E-E40E-43EB-BBAB-06372FCACBBB}.Release|x86.ActiveCfg = Release|x64
+		{39650472-DC4B-439C-99DB-77D5F0D11C29}.Debug|x64.ActiveCfg = Debug|x64
+		{39650472-DC4B-439C-99DB-77D5F0D11C29}.Debug|x64.Build.0 = Debug|x64
+		{39650472-DC4B-439C-99DB-77D5F0D11C29}.Debug|x86.ActiveCfg = Debug|Win32
+		{39650472-DC4B-439C-99DB-77D5F0D11C29}.Debug|x86.Build.0 = Debug|Win32
+		{39650472-DC4B-439C-99DB-77D5F0D11C29}.Release|x64.ActiveCfg = Release|x64
+		{39650472-DC4B-439C-99DB-77D5F0D11C29}.Release|x64.Build.0 = Release|x64
+		{39650472-DC4B-439C-99DB-77D5F0D11C29}.Release|x86.ActiveCfg = Release|Win32
+		{39650472-DC4B-439C-99DB-77D5F0D11C29}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

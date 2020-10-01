@@ -3,8 +3,7 @@
 #include "packet.h"
 #include <map>
 
-
-typedef void (*PacketHandlerFunction)(Packet, int);
+typedef void (*PacketHandlerFunction)(Packet*, int);
 class PacketMgr
 {
 public:
@@ -14,13 +13,12 @@ public:
 		return instance;
 	}
 
-
 private:
 	PacketMgr();
 
 	std::multimap<short, PacketHandlerFunction> callbacks;
 public:
 	void RegisterCallback(short opcode, PacketHandlerFunction callback);
-	void Send(Packet& packet, int recipient = -1);
-	void Handle(Packet& packet, int sender);
+	void Send(Packet* packet, int recipient = -1);
+	void Handle(Packet* packet, int sender);
 };

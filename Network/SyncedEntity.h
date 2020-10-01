@@ -18,8 +18,8 @@ public:
 class SyncedEntity {
 	
 public:
-	SyncedEntity(int entityKey);
-	
+	SyncedEntity();
+	~SyncedEntity();
 	int* addSyncedData(syncedData<int>&);
 	float* addSyncedData(syncedData<float>&);
 	std::string* addSyncedData(syncedData<std::string>&);
@@ -35,7 +35,7 @@ public:
 
 
 	SyncedEntity(const SyncedEntity&) = default;
-	SyncedEntity& operator=(const SyncedEntity&);
+	SyncedEntity& operator=(const SyncedEntity&) = default;
 
 private:
 

@@ -9,22 +9,12 @@ void PacketMgr::RegisterCallback(short opcode, PacketHandlerFunction callback)
 	callbacks.insert({ opcode, callback });
 }
 
-void PacketMgr::Send(Packet& packet, int recipient)
+void PacketMgr::Send(Packet* packet, int recipient)
 {
 	if (Server::GetInstance().IsStarted())
 	{
-		//We are host
-		auto rec = Server::GetInstance().GetParticipant(recipient);
-
-		//Building the packet
-		int dSize = 0;
-		char* d = packet.GetRaw(&dSize);
-
 		//Sending it
-		Server::GetInstance().SendOverSocket(rec->socket, d, dSize);
-
-		//Clean up
-		delete[] d;
+		Server::GetInstance().Send(recipient, packet);
 	}
 	else
 	{
@@ -32,9 +22,9 @@ void PacketMgr::Send(Packet& packet, int recipient)
 	}
 }
 
-void PacketMgr::Handle(Packet& packet, int sender)
+void PacketMgr::Handle(Packet* packet, int sender)
 {
-	auto opcode = packet.GetOpcode();
+	auto opcode = packet->GetOpcode();
 	std::cout << "Received packet with opcode " << opcode << " from Participant " << sender << std::endl;
 	auto handlers = callbacks.find(opcode);
 	auto handlerCount = callbacks.count(opcode);

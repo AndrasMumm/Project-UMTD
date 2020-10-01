@@ -6,7 +6,7 @@
 
 int main()
 {
-	Server server(1234);
+	Server::GetInstance().Start(1234);
 
 	while (true)
 	{

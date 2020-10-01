@@ -22,15 +22,16 @@ public:
 	~Board();
 	void loadBoardFromFile(string filename);
 
-	int rows;
-	int cols;
+	int height;
+	int width;
 
 	std::unordered_map<_i64, Tile> map;
 	
 	Tile* getTile(int x, int y);
 	Tile* getTile(_i64 key);
 
-	//vector<_i64> generatePath();
+	void connectNeighbours();
+	vector<vector<_i64>> generatePath();
 
 private:
 
