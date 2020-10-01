@@ -23,7 +23,7 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 	sync_hp.flag = true;
 	sync_hp.lastSyncedAt = TICK;
 	sync_hp.syncFreq = 50;
-	sync_hp.value = speed;
+	sync_hp.value = hp;
 	this->hp = syncedMirror->addSyncedData(sync_hp);
 
 
@@ -31,7 +31,7 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 	sync_size.flag = true;
 	sync_size.lastSyncedAt = TICK;
 	sync_size.syncFreq = 50;
-	sync_size.value = speed;
+	sync_size.value = size;
 	this->size = syncedMirror->addSyncedData(sync_size);
 
 
@@ -39,7 +39,7 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 	sync_armor.flag = true;
 	sync_armor.lastSyncedAt = TICK;
 	sync_armor.syncFreq = 50;
-	sync_armor.value = speed;
+	sync_armor.value = armor;
 	this->armor = syncedMirror->addSyncedData(sync_armor);
 
 
@@ -47,7 +47,7 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 	sync_shield.flag = true;
 	sync_shield.lastSyncedAt = TICK;
 	sync_shield.syncFreq = 50;
-	sync_shield.value = speed;
+	sync_shield.value = shield;
 	this->shield = syncedMirror->addSyncedData(sync_shield);
 
 
@@ -55,7 +55,7 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 	sync_regen.flag = true;
 	sync_regen.lastSyncedAt = TICK;
 	sync_regen.syncFreq = 50;
-	sync_regen.value = speed;
+	sync_regen.value = regen;
 	this->regen = syncedMirror->addSyncedData(sync_regen);
 
 
@@ -63,12 +63,41 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 	sync_progress.flag = true;
 	sync_progress.lastSyncedAt = TICK;
 	sync_progress.syncFreq = 50;
-	sync_progress.value = speed; 
+	sync_progress.value = progress; 
 	this->progress = syncedMirror->addSyncedData(sync_progress);
+
+
+	syncedData<int> sync_tile = syncedData<int>();
+	sync_tile.flag = true;
+	sync_tile.lastSyncedAt = TICK;
+	sync_tile.syncFreq = 50;
+	sync_tile.value = tile;
+	this->tile = syncedMirror->addSyncedData(sync_tile);
+
+
+
+	syncedData<int> sync_birth = syncedData<int>();
+	sync_birth.flag = true;
+	sync_birth.lastSyncedAt = TICK;
+	sync_birth.syncFreq = 50;
+	sync_birth.value = birth;
+	this->birth = syncedMirror->addSyncedData(sync_birth);
+
+	syncedData<int> sync_death = syncedData<int>();
+	sync_death.flag = true;
+	sync_death.lastSyncedAt = TICK;
+	sync_death.syncFreq = 50;
+	sync_death.value = death;
+	this->death = syncedMirror->addSyncedData(sync_death);
+
+
+
 }
 
 
 
 Enemy::~Enemy()
 {
+	EntityMgr::getInstance().removeSyncedEntity(syncedMirror);
 }
+
