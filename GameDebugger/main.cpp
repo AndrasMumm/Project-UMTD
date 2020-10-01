@@ -223,7 +223,7 @@ void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
 			float py = 1 - y * gridSize;
 			float pyp = py - gridSize;
 
-			addTile(vec3(px, py, 0.0f), vec3(pxp, pyp, 0.0f), board->map[y][x], vertices, uvices);
+			addTile(vec3(px, py, 0.0f), vec3(pxp, pyp, 0.0f), board->getTile(x,y)->type, vertices, uvices);
 		}
 	}
 }

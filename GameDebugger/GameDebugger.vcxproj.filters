@@ -49,5 +49,20 @@
     <None Include="TransformVertexShader.vertexshader">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="glew32.dll" />
+    <None Include="New Project (4).psd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="HexMap.dds" />
+    <Image Include="HexMap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="red.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="BlancGrid.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="uvtemplate.DDS" />
   </ItemGroup>
 </Project>

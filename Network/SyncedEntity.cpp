@@ -53,3 +53,16 @@ void SyncedEntity::clearAllFlags()
 		v.flag = false;
 	}
 }
+//
+//SyncedEntity::SyncedEntity(const SyncedEntity& a) :entityKey(a.entityKey)
+//{
+//}
+
+SyncedEntity& SyncedEntity::operator=(const SyncedEntity& in)
+{
+	auto a = SyncedEntity(in.entityKey);
+	return a;
+
+
+
+}
