@@ -43,7 +43,7 @@ void Server::Stop()
 Participant* Server::GetParticipant(int id)
 {
 	auto it = participants.find(id);
-	if (it == participants.end())
+	if (participants.end() == it)
 	{
 		std::cout << "ERROR: There is no participant with id " << id << std::endl;
 		return nullptr;
@@ -56,7 +56,6 @@ void Server::CleanupConnections()
 {
 	for (auto exParticipant : disconnectedParticipants)
 	{
-
 		exParticipant->connected = false;
 		if (exParticipant->handlerThread->joinable())
 		{
@@ -128,9 +127,5 @@ void Server::HandleParticipant(Participant* participant)
 
 	//Marks for cleanup
 	disconnectedParticipants.push_back(participant);
-	auto entry = std::find(participants.begin(), participants.end(), participant);
-	if (entry != participants.end())
-	{
-		participants.erase(entry);
-	}
+	auto entry = participants.erase(participant->id);
 }
