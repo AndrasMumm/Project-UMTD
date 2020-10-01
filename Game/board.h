@@ -3,10 +3,14 @@
 #include "helpingHeader.h"
 #include <unordered_map>
 #include "Tile.h"
+
+
 using namespace std;
 
-long makeKey(int x, int y) {
-	long ret = x << 32 + y;
+static _i64 makeKey(int x, int y) {
+	_i64 ret = x;
+	ret = ret << 32;
+	ret += y;
 	return ret;
 }
 
@@ -21,10 +25,12 @@ public:
 	int rows;
 	int cols;
 
-	std::unordered_map<long, Tile> map;
-
+	std::unordered_map<_i64, Tile> map;
+	
 	Tile* getTile(int x, int y);
-	Tile* getTile(long key);
+	Tile* getTile(_i64 key);
+
+	//vector<_i64> generatePath();
 
 private:
 

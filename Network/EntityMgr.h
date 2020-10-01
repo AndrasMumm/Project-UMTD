@@ -19,7 +19,7 @@ private:
 
     int lastGivenEntityKey = 100;
    
-    std::vector<SyncedEntity> syncedEntities;
+    std::vector<SyncedEntity*> syncedEntities;
 
 
 public:

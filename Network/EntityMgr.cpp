@@ -2,15 +2,14 @@
 
 SyncedEntity* EntityMgr::createSyncedEntity()
 {
-   syncedEntities.push_back(SyncedEntity(++lastGivenEntityKey));
-   SyncedEntity& ret = syncedEntities.back();
-   return &ret;
+	syncedEntities.push_back(new SyncedEntity(++lastGivenEntityKey));
+	return syncedEntities.back();
 }
 
 void EntityMgr::removeSyncedEntity(SyncedEntity* toBeRemoved)
 {
 	// ich weiﬂ hier w‰re ne hash map geil aber man habish kein bock 
 	//das sollte mal wer testen
-	syncedEntities.erase(syncedEntities.begin() + (toBeRemoved - &syncedEntities[0]));
-
+	syncedEntities.erase(std::find(syncedEntities.begin(),syncedEntities.end(),toBeRemoved));
+	delete toBeRemoved;
 }

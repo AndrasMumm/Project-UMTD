@@ -5,12 +5,13 @@
 class Tile
 {
 public:
-	Tile(long tileID);
+	Tile(_i64 tileID);
 
-	const long tileID;	
+	const _i64 tileID;	
 	std::vector<Tile*> neighbours;
 	bool isEdge;
 	int type;
+	int x, y;
 
 
 };

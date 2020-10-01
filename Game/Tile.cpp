@@ -1,5 +1,5 @@
 #include "Tile.h"
 
-Tile::Tile(int tileID):tileID(tileID)
+Tile::Tile(_i64 tileID):tileID(tileID)
 {
 }

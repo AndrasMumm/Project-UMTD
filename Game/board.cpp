@@ -25,7 +25,7 @@ void Board::loadBoardFromFile(string filename) {
 		for (int y = 0; y < rows; y++) {
 
 			createTile(x, y);
-			getTile(x, y)->type = vvi[x][y];
+			getTile(x, y)->type = vvi[y][x];
 		}
 	}
 
@@ -37,14 +37,14 @@ Tile* Board::getTile(int x, int y)
 	return &map.at(makeKey(x,y));
 }
 
-Tile* Board::getTile(long key)
+Tile* Board::getTile(_i64 key)
 {
 	return &map.at(key);
 }
 
 void Board::createTile(int x, int y)
 {
-	long key = makeKey(x, y);
+	_i64 key = makeKey(x, y);
 	map.insert({ key, Tile(key)});
 }
 

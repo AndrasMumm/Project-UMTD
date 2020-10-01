@@ -145,8 +145,25 @@
     <ClInclude Include="texture.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="glew32.dll" />
+    <None Include="New Project (4).psd" />
     <None Include="TextureFragmentShader.fragmentshader" />
     <None Include="TransformVertexShader.vertexshader" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="BlancGrid.png" />
+    <Image Include="HexMap.dds" />
+    <Image Include="HexMap.png" />
+    <Image Include="red.png" />
+    <Image Include="uvtemplate.DDS" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Game\Game.vcxproj">
+      <Project>{5ad4331e-4317-4270-a430-e47a0d99bb25}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Network\Network.vcxproj">
+      <Project>{7675a5a6-88e9-4f37-a77e-b8f38c82bdfd}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
