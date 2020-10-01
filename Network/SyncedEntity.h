@@ -21,7 +21,7 @@ public:
 	SyncedEntity(int entityKey);
 	int* addSyncedData(syncedData<int>&);
 	float* addSyncedData(syncedData<float>&);
-	std::string* addSyncedData(syncedData<std::string>&); 
+	std::string* addSyncedData(syncedData<std::string>&);
 
 	void flagInt(int id);
 	void flagFloat(int id);
@@ -31,7 +31,10 @@ public:
 	const int entityKey;
 	bool activelySynced = false;
 	int syncFreq = 0;
-	
+
+	SyncedEntity(const SyncedEntity&) = default;
+	SyncedEntity& operator=(const SyncedEntity&) = default;
+
 private:
 
 	

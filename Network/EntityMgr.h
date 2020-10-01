@@ -27,4 +27,5 @@ public:
     void operator=(EntityMgr const&) = delete;
 
     SyncedEntity* createSyncedEntity();
+    void removeSyncedEntity(SyncedEntity* toBeRemoved);
 };

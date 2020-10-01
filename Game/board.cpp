@@ -7,7 +7,7 @@ void Board::loadBoardFromFile(string filename) {
 
 	ifstream infile(filename);
 	string line;
-	
+	vvint vvi;
 	rows = 0;
 	while (getline(infile, line)) {
 		cols = 0;
@@ -19,8 +19,33 @@ void Board::loadBoardFromFile(string filename) {
 			cols++;
 		}
 		rows++;
-		map.push_back(tmp);
+		vvi.push_back(tmp);
 	}
+	for (int x = 0; x < cols; x++) {
+		for (int y = 0; y < rows; y++) {
+
+			createTile(x, y);
+			getTile(x, y)->type = vvi[x][y];
+		}
+	}
+
+
+}
+
+Tile* Board::getTile(int x, int y)
+{
+	return &map.at(makeKey(x,y));
+}
+
+Tile* Board::getTile(long key)
+{
+	return &map.at(key);
+}
+
+void Board::createTile(int x, int y)
+{
+	long key = makeKey(x, y);
+	map.insert({ key, Tile(key)});
 }
 
 Board::Board() {}
