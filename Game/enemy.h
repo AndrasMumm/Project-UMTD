@@ -2,8 +2,9 @@
 #include <Network/SyncedEntity.h>
 #include <Network/EntityMgr.h>
 #include <Game/clock.h>
+#include "gameentity.h"
 
-class Enemy : public SyncedEntity
+class Enemy : public GameEntity
 {
 public:
 	Enemy();

@@ -1,4 +1,4 @@
-#include "EntityMgr.h"
+Ôªø#include "EntityMgr.h"
 
 int EntityMgr::addSyncedEntity(SyncedEntity* t)
 {
@@ -8,7 +8,7 @@ int EntityMgr::addSyncedEntity(SyncedEntity* t)
 
 void EntityMgr::removeSyncedEntity(SyncedEntity* toBeRemoved)
 {
-	// ich weiﬂ hier w‰re ne hash map geil aber man habish kein bock 
+	// ich wei√ü hier w√§re ne hash map geil aber man habish kein bock 
 	//das sollte mal wer testen
-	syncedEntities.erase(std::find(syncedEntities.begin(),syncedEntities.end(),toBeRemoved));
+	syncedEntities.erase(std::find(syncedEntities.begin(), syncedEntities.end(), toBeRemoved));
 }

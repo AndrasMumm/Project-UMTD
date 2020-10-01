@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include <Network/SyncedEntity.h>
@@ -8,23 +8,23 @@
 class Clock
 {
 public:
-    static Clock& getInstance()
-    {
-        static Clock instance;
+	static Clock& getInstance()
+	{
+		static Clock instance;
 
-        return instance;
-    }
-    int getTick();
-    void tick();
+		return instance;
+	}
+	int getTick();
+	void tick();
 private:
-    Clock() {}
+	Clock() {}
 
-    int tock;
+	int tock;
 
-    
+
 
 public:
-    Clock(Clock const&) = delete;
-    void operator=(Clock const&) = delete;
+	Clock(Clock const&) = delete;
+	void operator=(Clock const&) = delete;
 
 };

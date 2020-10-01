@@ -143,7 +143,6 @@ void Server::HandleParticipant(Participant* participant)
 		Packet* p = new Packet(data, dataSize);
 		PacketMgr::GetInstance().Handle(p, participant->id);
 		//Cleanup
-		delete p;
 		delete[] data;
 	}
 
