@@ -33,9 +33,6 @@
     <ClInclude Include="helpingHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SyncedEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="enemy.cpp">
@@ -45,9 +42,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="gamestate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SyncedEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
