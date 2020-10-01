@@ -3,11 +3,13 @@
 #include <boost/asio.hpp>
 #include <boost/asio/ip/tcp.hpp>
 #include <unordered_map>
+#include "Packets/PacketMgr.h"
 
 using namespace boost::asio;
 using ip::tcp;
 
 #define DEFAULT_GAME_PORT 1234
+#define PACKET_DELIMTER 29 //'A'
 
 class Participant
 {
@@ -66,10 +68,13 @@ public:
 	void ConnectionHandlerFunction();
 	void CleanupConnections();
 
-	const char* ReadFromSocket(tcp::socket* socket, int* dataSize);
+	const char* ReadFromSocket(tcp::socket* socket, int* dataSize, boost::system::error_code& ec);
 	void SendOverSocket(tcp::socket* socket, const char* data, int dataSize);
+	void Send(int participantID, Packet* p);
 
 	bool IsStarted();
 	void Start(int port = DEFAULT_GAME_PORT);
 	void Stop();
+
+	static void PingPacketHandler(Packet* p, int sender);
 };

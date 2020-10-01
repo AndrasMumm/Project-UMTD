@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <vector>
+#include "opcodes.h"
+
 class Packet
 {
 	short _opcode;
@@ -32,7 +34,7 @@ public:
 		SetOpcode(*((short*)d));
 		int actualDataSize = dSize - 2;
 		data.resize(actualDataSize);
-		memcpy(data.data(), d, actualDataSize);
+		memcpy(data.data(), d + 2, actualDataSize);
 	};
 	~Packet() {}
 };
