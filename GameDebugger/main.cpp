@@ -136,9 +136,9 @@ int main(void)
 
 	Tile* start = game.board.getTile(0, 5);
 	for (int i = 0; i < numEnemys; i++) {
-		game.enemys.push_back(new Enemy(.01f + .01f * i / numEnemys , 1, 1, 1, 1, 1, 1, start->x, start->y, start->tileID, 0, -1, path[0]));
+		game.enemys.push_back(new Enemy(.01f + .01f * i / numEnemys, 1, 1, 1, 1, 1, 1, start->x, start->y, start->tileID, 0, -1, path[0]));
 	}
-	
+
 
 	Enemy* e = game.enemys.back();
 	vec3 pos_off = vec3(*(e->x) * gridSize, -*(e->y) * gridSize, 0.0f);
@@ -146,17 +146,17 @@ int main(void)
 	float x_off = -1;
 	float y_off = 1;
 
-	float radius = gridSize/2;
+	float radius = gridSize / 2;
 
 	for (int i = 0; i < numEnemyVertices; i++) {
 		vertices.push_back(vec3(x_off, y_off, .002f));
-		
+
 		int ni = i + 1 < numEnemyTriangle ? i + 1 : 0;
-		
+
 		float rad = 2 * pi<float>() / numEnemyTriangle;
 
-		vertices.push_back(vec3(cosf(rad* i)* radius + x_off, sinf(rad* i)* radius + y_off, .002f));
-		vertices.push_back(vec3(cosf(rad* ni)* radius + x_off, sinf(rad* ni)* radius + y_off, .002f));
+		vertices.push_back(vec3(cosf(rad * i) * radius + x_off, sinf(rad * i) * radius + y_off, .002f));
+		vertices.push_back(vec3(cosf(rad * ni) * radius + x_off, sinf(rad * ni) * radius + y_off, .002f));
 
 
 		uvices.push_back(vec3(0, 0, 1));
@@ -191,7 +191,7 @@ int main(void)
 
 	do {
 		for (Enemy* e : game.enemys) {
-			e->update(1);
+			e->Update(1);
 		}
 
 		// Clear the screen
@@ -201,7 +201,7 @@ int main(void)
 		//update buffer;
 		glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
 		mat4* matrices = (mat4*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-		
+
 		for (int i = 0; i < game.enemys.size(); i++) {
 			matrices[i] = glm::translate(glm::identity<mat4>(), vec3(*(game.enemys[i]->x) * gridSize, -*(game.enemys[i]->y) * gridSize, .001f));
 			//transforms[i] = glm::identity<mat4>();
@@ -222,7 +222,7 @@ int main(void)
 
 		// compute game update
 
-		
+
 
 		pos_off = vec3(*(e->x) * gridSize, -*(e->y) * gridSize, 0.0f);
 
@@ -262,7 +262,7 @@ int main(void)
 			(void*)0                          // array buffer offset
 		);
 
-	
+
 		for (int i = 0; i < 4; i++) {
 
 			glEnableVertexAttribArray(2 + i);
@@ -281,10 +281,10 @@ int main(void)
 		}
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		// Draw the triangle !
-		glDrawArrays(GL_TRIANGLES, numEnemyVertices, vertices.size()*3 - numEnemyVertices); // 12*3 indices starting at 0 -> 12 triangles
+		glDrawArrays(GL_TRIANGLES, numEnemyVertices, vertices.size() * 3 - numEnemyVertices); // 12*3 indices starting at 0 -> 12 triangles
 		//glDrawArrays(GL_TRIANGLES, vertices.size() * 3 - 3, 3);
-		glDrawArraysInstanced(GL_TRIANGLES, 0, numEnemyVertices ,game.enemys.size());
-		
+		glDrawArraysInstanced(GL_TRIANGLES, 0, numEnemyVertices, game.enemys.size());
+
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 
