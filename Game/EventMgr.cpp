@@ -10,6 +10,7 @@ void EventMgr::Update(int tick)
 	{
 		it->second->Trigger(entity, it->first - TICK);
 		toRemove.push_back(it);
+		it++;
 	}
 
 	for (auto it : toRemove)
