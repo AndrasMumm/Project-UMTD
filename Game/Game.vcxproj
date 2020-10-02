@@ -100,7 +100,6 @@
     <ClInclude Include="gamestate.h" />
     <ClInclude Include="helpingHeader.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="timing.h" />
     <ClInclude Include="tower.h" />
   </ItemGroup>
   <ItemGroup>

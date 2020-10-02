@@ -7,9 +7,9 @@
 
 using namespace std;
 
-static _i64 makeKey(int x, int y) {
-	_i64 ret = x;
-	ret = ret << 32;
+static int makeKey(short x, short y) {
+	int ret = x;
+	ret = ret << 16;
 	ret += y;
 	return ret;
 }
@@ -25,17 +25,17 @@ public:
 	int height;
 	int width;
 
-	std::unordered_map<_i64, Tile> map;
+	std::unordered_map<int, Tile> map;
 	
-	Tile* getTile(int x, int y);
-	Tile* getTile(_i64 key);
+	Tile* getTile(short x, short y);
+	Tile* getTile(int key);
 
 	void connectNeighbours();
-	vector<vector<_i64>> generatePath();
+	vector<vector<int>> generatePath();
 
 private:
 
-	void createTile(int x, int y);
+	void createTile(short x, short y);
 	
 	
 };

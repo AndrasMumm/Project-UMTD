@@ -27,9 +27,6 @@
     <ClInclude Include="enemy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="timing.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="helpingHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>

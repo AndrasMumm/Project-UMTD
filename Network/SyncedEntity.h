@@ -20,9 +20,9 @@ class SyncedEntity {
 public:
 	SyncedEntity();
 	~SyncedEntity();
-	int* addSyncedData(syncedData<int>&);
-	float* addSyncedData(syncedData<float>&);
-	std::string* addSyncedData(syncedData<std::string>&);
+	void addSyncedData(syncedData<int>*);
+	void addSyncedData(syncedData<float>*);
+	void addSyncedData(syncedData<std::string>*);
 
 	void flagInt(int id);
 	void flagFloat(int id);
@@ -36,13 +36,10 @@ public:
 
 	SyncedEntity(const SyncedEntity&) = default;
 	SyncedEntity& operator=(const SyncedEntity&) = default;
-
-private:
-
 	
-	std::vector<syncedData<int>> syncedInts;
-	std::vector<syncedData<float>> syncedFloat;
-	std::vector<syncedData<std::string>> syncedString;
+	std::vector<syncedData<int>*> syncedInts;
+	std::vector<syncedData<float>*> syncedFloat;
+	std::vector<syncedData<std::string>*> syncedString;
 
 
 };
