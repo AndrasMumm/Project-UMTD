@@ -1,6 +1,7 @@
-﻿#include "Client.h"
+﻿#include "client.h"
 #include "Packets/Testing/Ping.h"
 #include "Packets/Testing/Pong.h"
+#include "server.h"
 
 Client::Client()
 {
@@ -11,6 +12,7 @@ Client::~Client()
 {
 	delete _ioService;
 	delete _socket;
+	delete serverHandleThread;
 }
 
 void Client::Connect(std::string ip, int port)
@@ -56,6 +58,20 @@ void Client::Connect(std::string ip, int port)
 	}
 
 	delete p;
+
+	//Creating Handle thread
+	serverHandleThread = new std::thread([&](Client* client) {
+		client->HandleServerConnection();
+		}, this);
+}
+
+void Client::HandleServerConnection()
+{
+	while (_socket != nullptr)
+	{
+		Packet* p = Read();
+		PacketMgr::GetInstance().Handle(p, SERVER_ID);
+	}
 }
 
 Packet* Client::Read()

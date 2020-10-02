@@ -7,7 +7,7 @@ void EventMgr::Update(GameEntity* entity, int tick)
 	auto it = events.begin();
 	while (it != events.end() && it->first <= tick)
 	{
-		it->second->trigger(entity, it->first - tick);
+		it->second->Trigger(entity, it->first - tick);
 		toRemove.push_back(it);
 	}
 
@@ -19,6 +19,6 @@ void EventMgr::Update(GameEntity* entity, int tick)
 
 void EventMgr::AddEvent(GameEntity* entity, GameEvent* gameEvent)
 {
-	gameEvent->onCreate(entity);
+	gameEvent->OnCreate(entity);
 	events.insert({ gameEvent->triggerTick, gameEvent });
 }

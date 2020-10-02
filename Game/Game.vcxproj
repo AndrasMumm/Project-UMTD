@@ -97,6 +97,7 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="clock.h" />
     <ClInclude Include="enemy.h" />
+    <ClInclude Include="EventSystem\EventCallbackHandler.h" />
     <ClInclude Include="EventMgr.h" />
     <ClInclude Include="EventSystem\EventList.h" />
     <ClInclude Include="EventSystem\GameEvent.h" />
@@ -110,7 +111,9 @@
     <ClCompile Include="board.cpp" />
     <ClCompile Include="clock.cpp" />
     <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="EventSystem\EventCallbackHandler.cpp" />
     <ClCompile Include="EventMgr.cpp" />
+    <ClCompile Include="EventSystem\GameEvent.cpp" />
     <ClCompile Include="gamestate.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>

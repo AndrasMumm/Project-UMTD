@@ -82,8 +82,8 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the model object.
-	
-	result = m_Model->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), "..\\Data\\rock.txt","..\\Data\\stone01.tga");
+
+	result = m_Model->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), "..\\Data\\rock.txt", "..\\Data\\stone01.tga");
 	if (!result)
 	{
 		MessageBox(hwnd, L"Could not initialize the model object.", L"Error", MB_OK);
@@ -112,7 +112,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 	}
 
 	// Initialize the bitmap object.
-	
+
 	result = m_Bitmap->Initialize(m_Direct3D->GetDevice(), m_Direct3D->GetDeviceContext(), screenWidth, screenHeight, "..\\Data\\stone01.tga", 256, 256);
 	if (!result)
 	{
@@ -120,7 +120,7 @@ bool GraphicsClass::Initialize(int screenWidth, int screenHeight, HWND hwnd)
 		return false;
 	}
 
-	
+
 	// Create the light shader object.
 	m_LightShader = new LightShaderClass;
 	if (!m_LightShader)
@@ -181,14 +181,14 @@ void GraphicsClass::Shutdown()
 		delete m_LightShader;
 		m_LightShader = 0;
 	}
-		// Release the texture shader object.
-	/*if (m_TextureShader)
-	{
-		m_TextureShader->Shutdown();
-		delete m_TextureShader;
-		m_TextureShader = 0;
-	}*/
-	// Release the model object.
+	// Release the texture shader object.
+/*if (m_TextureShader)
+{
+	m_TextureShader->Shutdown();
+	delete m_TextureShader;
+	m_TextureShader = 0;
+}*/
+// Release the model object.
 	if (m_Model)
 	{
 		m_Model->Shutdown();
@@ -264,7 +264,7 @@ bool GraphicsClass::Render(float rotation)
 		return false;
 	}
 	// Turn off alpha blending after rendering the text.
-	m_D3D->TurnOffAlphaBlending();
+	m_Direct3D->TurnOffAlphaBlending();
 
 	// Put the bitmap vertex and index buffers on the graphics pipeline to prepare them for drawing.
 	result = m_Bitmap->Render(m_Direct3D->GetDeviceContext(), 100, 100);
