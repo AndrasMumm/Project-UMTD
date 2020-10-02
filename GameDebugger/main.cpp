@@ -24,6 +24,10 @@ using namespace glm;
 #include <Game\board.h>
 #include <Game\gamestate.h>
 
+#define numEnemys 2
+#define numEnemyTriangle 12
+#define numEnemyVertices numEnemyTriangle*3
+
 typedef vector<vec3> vvec3;
 
 void createBlancBoard(Board* board, float gridSize, vvec3& vertices, vvec3& uvices);
@@ -95,8 +99,6 @@ int main(void)
 	// Get a handle for our "MVP" uniform
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
-	GLuint pos_offID = glGetUniformLocation(programID, "POS_OFF");
-
 	// Load the texture
 	unsigned int texture;
 	glGenTextures(1, &texture);
@@ -125,6 +127,7 @@ int main(void)
 
 	vvec3 vertices;
 	vvec3 uvices;
+
 	GameState& game = GameState::getInstance();
 	vvint path = game.board.generatePath();
 
@@ -132,25 +135,37 @@ int main(void)
 
 
 	Tile* start = game.board.getTile(0, 5);
-	game.enemys.push_back(new Enemy(.005f, 1, 1, 1, 1, 1, 1, start->x, start->y, start->tileID, 0, -1, path[0]));
+	for (int i = 0; i < numEnemys; i++) {
+		game.enemys.push_back(new Enemy(.01f + .01f * i / numEnemys , 1, 1, 1, 1, 1, 1, start->x, start->y, start->tileID, 0, -1, path[0]));
+	}
+	
 
 	Enemy* e = game.enemys.back();
 	vec3 pos_off = vec3(*(e->x) * gridSize, -*(e->y) * gridSize, 0.0f);
 
-	createBlancBoard(&game.board, gridSize, vertices, uvices);
-
+	float x_off = -1;
 	float y_off = 1;
 
-	float x_off = -1;
+	float radius = gridSize/2;
 
-	vertices.push_back(vec3(x_off, y_off - gridSize, .02f));
-	vertices.push_back(vec3(x_off, y_off, .02f));
-	vertices.push_back(vec3(x_off + gridSize, y_off, .02f));
+	for (int i = 0; i < numEnemyVertices; i++) {
+		vertices.push_back(vec3(x_off, y_off, .002f));
+		
+		int ni = i + 1 < numEnemyTriangle ? i + 1 : 0;
+		
+		float rad = 2 * pi<float>() / numEnemyTriangle;
 
-	uvices.push_back(vec3(0, 0, 1));
-	uvices.push_back(vec3(0, 0, 1));
-	uvices.push_back(vec3(0, 0, 1));
+		vertices.push_back(vec3(cosf(rad* i)* radius + x_off, sinf(rad* i)* radius + y_off, .002f));
+		vertices.push_back(vec3(cosf(rad* ni)* radius + x_off, sinf(rad* ni)* radius + y_off, .002f));
 
+
+		uvices.push_back(vec3(0, 0, 1));
+		uvices.push_back(vec3(0, 0, 1));
+		uvices.push_back(vec3(0, 0, 1));
+	}
+
+
+	createBlancBoard(&game.board, gridSize, vertices, uvices);
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
@@ -161,11 +176,39 @@ int main(void)
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glBufferData(GL_ARRAY_BUFFER, uvices.size() * sizeof(uvices[0]), uvices.data(), GL_STATIC_DRAW);
 
+	mat4 transforms[numEnemys];
+
+	for (int i = 0; i < numEnemys; i++) {
+		transforms[i] = glm::identity<mat4>();
+	}
+
+	GLuint instanceVBO;
+	glGenBuffers(1, &instanceVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(mat4) * numEnemys, &transforms[0], GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 	do {
+		for (Enemy* e : game.enemys) {
+			e->update(1);
+		}
 
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
+		//update buffer;
+		glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+		mat4* matrices = (mat4*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+		
+		for (int i = 0; i < game.enemys.size(); i++) {
+			matrices[i] = glm::translate(glm::identity<mat4>(), vec3(*(game.enemys[i]->x) * gridSize, -*(game.enemys[i]->y) * gridSize, .001f));
+			//transforms[i] = glm::identity<mat4>();
+
+		}
+		glUnmapBuffer(GL_ARRAY_BUFFER);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		// Use our shader
 		glUseProgram(programID);
 
@@ -179,7 +222,7 @@ int main(void)
 
 		// compute game update
 
-		e->Update(1);
+		
 
 		pos_off = vec3(*(e->x) * gridSize, -*(e->y) * gridSize, 0.0f);
 
@@ -188,7 +231,6 @@ int main(void)
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-		glUniform3f(pos_offID, pos_off.x, pos_off.y, pos_off.z);
 
 		// Bind our texture in Texture Unit 0
 		glActiveTexture(GL_TEXTURE0);
@@ -220,9 +262,29 @@ int main(void)
 			(void*)0                          // array buffer offset
 		);
 
-		// Draw the triangle !
-		glDrawArrays(GL_TRIANGLES, 0, vertices.size() * 3); // 12*3 indices starting at 0 -> 12 triangles
+	
+		for (int i = 0; i < 4; i++) {
 
+			glEnableVertexAttribArray(2 + i);
+			glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+			glVertexAttribPointer(
+				2 + i,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+				4,                                // size : U+V => 2
+				GL_FLOAT,                         // type
+				GL_FALSE,                         // normalized?
+				sizeof(mat4),                 // stride
+				(void*)(sizeof(vec4) * i)                        // array buffer offset
+			);
+			glEnableVertexAttribArray(2 + i);
+			glVertexAttribDivisor(2 + i, 1);
+
+		}
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		// Draw the triangle !
+		glDrawArrays(GL_TRIANGLES, numEnemyVertices, vertices.size()*3 - numEnemyVertices); // 12*3 indices starting at 0 -> 12 triangles
+		//glDrawArrays(GL_TRIANGLES, vertices.size() * 3 - 3, 3);
+		glDrawArraysInstanced(GL_TRIANGLES, 0, numEnemyVertices ,game.enemys.size());
+		
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 

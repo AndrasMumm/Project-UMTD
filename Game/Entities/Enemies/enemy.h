@@ -5,14 +5,23 @@
 #include "../gameentity.h"
 #include "../../Tile.h"
 
+
+
 class Enemy : public GameEntity
 {
 public:
 	Enemy();
-	/*Lennos special testing enemy constructor. Remove once possible*/
+	// lennos special needs constructor
 	Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, float x, float y, int tile, int birth, int death, vint& path);
 	//Actual proper constructor
 	Enemy(int entityKey, int level, float speed, float hp, float size, float armor, float shield, float regen, float x, float y, int birthTick, int typeID);
+	
+	
+	
+	
+	
+	
+	
 	void Update(int dt);
 
 	int getPath(int index);
@@ -42,5 +51,9 @@ private:
 
 	int path_length;
 	int path_sIndex;
+
+
+	void updateTile();
+
 	float* progress;
 };
