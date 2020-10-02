@@ -3,7 +3,7 @@
 using namespace std;
 
 
-SyncedEntity::SyncedEntity() : entityKey(EntityMgr::getInstance().addSyncedEntity(this)) {
+SyncedEntity::SyncedEntity(int entityKey) : entityKey(entityKey) {
 
 }
 

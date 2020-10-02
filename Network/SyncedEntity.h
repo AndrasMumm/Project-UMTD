@@ -15,11 +15,10 @@ public:
 };
 
 
-
 class SyncedEntity {
 
 public:
-	SyncedEntity();
+	SyncedEntity(int);
 	~SyncedEntity();
 	void addSyncedData(syncedData<int>*);
 	void addSyncedData(syncedData<float>*);

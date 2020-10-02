@@ -8,7 +8,6 @@
 class Enemy : public GameEntity
 {
 public:
-	Enemy();
 	Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, float x, float y, int tile, int birth, int death, vint& path);
 
 	void update(int dt);
