@@ -28,7 +28,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 
 	//Game Objects
 
-	GameState* gameState = new GameState();
+	GameState& gameState = GameState::getInstance();
 
 
 
@@ -44,10 +44,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	System->Shutdown();
 	delete System;
 	System = 0;
-
-	//delete Game Objects
-
-	delete gameState;
 
 	return 0;
 }

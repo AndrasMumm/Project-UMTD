@@ -39,9 +39,9 @@ public:
 	void OnCreate()
 	{
 		//This packet can only be created by the server, hence we for sure send it to all people if we are server.
-		if (Server::GetInstance().isStarted())
+		if (Server::GetInstance().IsStarted())
 		{
-			SendToAll()
+			//SendToAll()
 		}
 	}
 

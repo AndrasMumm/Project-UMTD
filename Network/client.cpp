@@ -1,6 +1,7 @@
-﻿#include "Client.h"
+﻿#include "client.h"
 #include "Packets/Testing/Ping.h"
 #include "Packets/Testing/Pong.h"
+#include "server.h"
 
 Client::Client()
 {
@@ -69,7 +70,7 @@ void Client::HandleServerConnection()
 	while (_socket != nullptr)
 	{
 		Packet* p = Read();
-		PacketMgr::GetInstance().Handle(p, SERVER__ID);
+		PacketMgr::GetInstance().Handle(p, SERVER_ID);
 	}
 }
 

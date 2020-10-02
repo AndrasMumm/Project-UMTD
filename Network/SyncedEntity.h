@@ -1,9 +1,9 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include <string>
 
-template <typename T>  class syncedData{
+template <typename T>  class syncedData {
 
 public:
 	T value;
@@ -16,7 +16,7 @@ public:
 
 
 class SyncedEntity {
-	
+
 public:
 	SyncedEntity();
 	~SyncedEntity();
@@ -33,11 +33,11 @@ public:
 	bool activelySynced;
 	int syncFreq;
 
-	void Update(int delta);
+	virtual void Update(int delta);
 
 	SyncedEntity(const SyncedEntity&) = default;
 	SyncedEntity& operator=(const SyncedEntity&) = default;
-	
+
 	std::vector<syncedData<int>*> syncedInts;
 	std::vector<syncedData<float>*> syncedFloat;
 	std::vector<syncedData<std::string>*> syncedString;

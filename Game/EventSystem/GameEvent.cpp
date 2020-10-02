@@ -28,7 +28,7 @@ void GameEvent::SendToAll(GameEntity* entity)
 		break;
 	case CREATE_ENEMY_EVENT_ID:
 		CreateEnemyEvent* ev = (CreateEnemyEvent*)this;
-		Put<int>(&data, 0, );
+		//Put<int>(&data, 0, );
 	}
 
 	CreateEventPacket packet = CreateEventPacket(entity->entityKey, eventID, triggerTick, &data);
