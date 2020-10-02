@@ -270,7 +270,7 @@ Tile* Enemy::getNextTile()
 	return GameState::getInstance().board.getTile(syncedInts[path_sIndex + *current_path + 1]->value);
 }
 
-void Enemy::update(int dt) {
+void Enemy::Update(int dt) {
 
 	GameState& game = GameState::getInstance();
 	Board& board = game.board;
