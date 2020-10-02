@@ -14,11 +14,11 @@ void Put(std::vector<char>* v, int index, T value)
 	*(((T*)v->begin()) + index) = value;
 };
 
-void GameEvent::SendToAll(GameEntity* entity)
+void GameEvent::SendToAll(int entityKey)
 {
 	if (_sentToAll)
 	{
-		std::cout << "Cannot double send CreateEventPacket for event " << eventID << " from entity " << entity->entityKey << std::endl;
+		std::cout << "Cannot double send CreateEventPacket for event " << eventID << std::endl;
 	}
 
 	std::vector<char> data;
@@ -31,7 +31,7 @@ void GameEvent::SendToAll(GameEntity* entity)
 		//Put<int>(&data, 0, );
 	}
 
-	CreateEventPacket packet = CreateEventPacket(entity->entityKey, eventID, triggerTick, &data);
+	CreateEventPacket packet = CreateEventPacket(entityKey, eventID, triggerTick, &data);
 	if (Server::GetInstance().IsStarted())
 	{
 		//We are server

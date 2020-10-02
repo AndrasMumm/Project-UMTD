@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <string>
+#include "Packets/Sync/SyncDataPacket.h"
 
 template <typename T>  class syncedData {
 
@@ -34,6 +35,7 @@ public:
 	int syncFreq;
 
 	virtual void Update(int delta);
+	virtual void ReceiveSync(SyncDataPacket* packet);
 
 	SyncedEntity(const SyncedEntity&) = default;
 	SyncedEntity& operator=(const SyncedEntity&) = default;
