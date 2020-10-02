@@ -23,6 +23,7 @@ SyncedEntity::~SyncedEntity()
 
 }
 void SyncedEntity::Update(int delta) {};
+void SyncedEntity::ReceiveSync(SyncDataPacket* packet) {};
 
 void SyncedEntity::addSyncedData(syncedData<int>* data)
 {

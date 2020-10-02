@@ -39,8 +39,7 @@ void GameEvent::SendToAll(int entityKey)
 	}
 	else
 	{
-		//We are client
-		Client::GetInstance().Send(&packet);
+		std::cout << "ERROR: Client cannot call SendToAll";
 	}
 
 	_sentToAll = true;
