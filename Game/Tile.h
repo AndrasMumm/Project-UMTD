@@ -5,9 +5,9 @@
 class Tile
 {
 public:
-	Tile(_i64 tileID);
+	Tile(int tileID);
 
-	const _i64 tileID;	
+	const int tileID;	
 	std::vector<Tile*> neighbours;
 	bool isEdge;
 	int type;

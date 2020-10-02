@@ -32,15 +32,16 @@ void Board::loadBoardFromFile(string filename) {
 		}
 	}
 	connectNeighbours();
-
+	
+	
 }
 
-Tile* Board::getTile(int x, int y)
+Tile* Board::getTile(short x, short y)
 {
 	return &map.at(makeKey(x,y));
 }
 
-Tile* Board::getTile(_i64 key)
+Tile* Board::getTile(int key)
 {
 	return &map.at(key);
 }
@@ -57,27 +58,32 @@ void Board::connectNeighbours()
 	}
 }
 
-vector<vector<_i64>> Board::generatePath()
+vector<vector<int>> Board::generatePath()
 {
-	vector<vector<_i64>> fault;
+	vector<vector<int>> ret;
 
 	Tile* start = 0;
 	Tile* end = 0;
 	for (auto i = map.begin(); i != map.end(); i++) {
 		if (i->second.type == 1) start = &(i->second);
-		if (i->second.type == 3) end = &(i->second);
+		if (i->second.type == 2) end = &(i->second);
 	}
 
-	if (start == 0 || end == 0) return fault;
+	if (start == 0 || end == 0) return ret;
 	Tile* current = start;
 	Tile* last = start;
-	vector<_i64> tmp;
+	vector<int> tmp;
+	tmp.push_back(start->tileID);
 	while (current != end) {
-
 		for (Tile* t : current->neighbours) {
-			if (t->type = 3 && t != last) {
+			if (t->type == 3 && t != last) {
 				tmp.push_back(t->tileID);
 				last = current;
+				current = t;
+				break;
+			}
+			if (t->type == 2) {
+				tmp.push_back(end->tileID);
 				current = t;
 				break;
 			}
@@ -85,14 +91,16 @@ vector<vector<_i64>> Board::generatePath()
 		}
 
 	}
+	ret.push_back(tmp);
 
-	return fault;
+
+	return ret;
 
 }
 
-void Board::createTile(int x, int y)
+void Board::createTile(short x, short y)
 {
-	_i64 key = makeKey(x, y);
+	int key = makeKey(x, y);
 	map.insert({ key, Tile(key)});
 }
 

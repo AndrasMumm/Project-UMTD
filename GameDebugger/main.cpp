@@ -26,11 +26,10 @@ using namespace glm;
 
 typedef vector<vec3> vvec3;
 
-void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices);
+void createBlancBoard(Board* board,float gridSize, vvec3& vertices, vvec3& uvices);
 void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices);
 int screen_width = 1920 / 2;
 int screen_height = 1080 / 2;
-
 int main(void)
 {
 	// Initialise GLFW
@@ -96,6 +95,8 @@ int main(void)
 	// Get a handle for our "MVP" uniform
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
+	GLuint pos_offID = glGetUniformLocation(programID, "POS_OFF");
+
 	// Load the texture
 	unsigned int texture;
 	glGenTextures(1, &texture);
@@ -124,9 +125,31 @@ int main(void)
 
 	vvec3 vertices;
 	vvec3 uvices;
-	GameState game = GameState();
-	createBlancBoard(&game.board, vertices, uvices);
+	GameState& game = GameState::getInstance();
+	vvint path = game.board.generatePath();
 
+	float gridSize = game.board.width / screen_width > game.board.height / screen_height ? 2.0f / game.board.width : 2.0f / game.board.height;
+
+
+	Tile* start = game.board.getTile(0, 5);
+	game.enemys.push_back(new Enemy(.005f,1,1,1,1,1,1,start->x,start->y,start->tileID,0,-1,path[0]));
+
+	Enemy* e = game.enemys.back();
+	vec3 pos_off = vec3(*(e->x)*gridSize, -*(e->y)*gridSize, 0.0f);
+
+	createBlancBoard(&game.board,gridSize, vertices, uvices);
+
+	float y_off = 1;
+
+	float x_off = -1;
+
+	vertices.push_back(vec3(x_off, y_off-gridSize, .02f));
+	vertices.push_back(vec3(x_off, y_off, .02f));
+	vertices.push_back(vec3(x_off+gridSize, y_off, .02f));
+
+	uvices.push_back(vec3(0, 0, 1));
+	uvices.push_back(vec3(0, 0, 1));
+	uvices.push_back(vec3(0, 0, 1));
 
 	GLuint vertexbuffer;
 	glGenBuffers(1, &vertexbuffer);
@@ -139,6 +162,7 @@ int main(void)
 	glBufferData(GL_ARRAY_BUFFER, uvices.size() * sizeof(uvices[0]), uvices.data(), GL_STATIC_DRAW);
 
 	do {
+
 		// Clear the screen
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -152,9 +176,19 @@ int main(void)
 		glm::mat4 ModelMatrix = glm::mat4(1.0);
 		glm::mat4 MVP = ProjectionMatrix * ViewMatrix * ModelMatrix;
 
+
+		// compute game update
+
+		e->update(1);
+
+		pos_off = vec3(*(e->x) * gridSize, -*(e->y) * gridSize, 0.0f);
+
+
+
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
+		glUniform3f(pos_offID, pos_off.x, pos_off.y, pos_off.z);
 
 		// Bind our texture in Texture Unit 0
 		glActiveTexture(GL_TEXTURE0);
@@ -212,8 +246,8 @@ int main(void)
 	return 0;
 }
 
-void createBlancBoard(Board* board, vvec3& vertices, vvec3& uvices) {
-	float gridSize = board->width / screen_width > board->height / screen_height ? 2.0f / board->width : 2.0f / board->height;
+void createBlancBoard(Board* board, float gridSize, vvec3& vertices, vvec3& uvices) {
+	
 
 	for (int x = 0; x < board->width; x++) {
 		for (int y = 0; y < board->height; y++) {
