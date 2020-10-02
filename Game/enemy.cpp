@@ -1,6 +1,8 @@
 ﻿#include "enemy.h"
 #include "gamestate.h"
+#include <DirectXMath.h>
 
+using namespace DirectX;
 
 Enemy::Enemy()
 {
@@ -128,7 +130,8 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 		sync_path->value = i;
 		this->addSyncedData(sync_path);
 	}
-
+	*(this->tile) = GameState::getInstance().board.getTile(x, y)->tileID;
+	GameState::getInstance().board.getTile(*(this->tile))->enemys.insert({ this->entityKey,this });
 }
 
 int Enemy::getPath(int index)
@@ -141,32 +144,78 @@ Tile* Enemy::getCurrentTile()
 {
 	return GameState::getInstance().board.getTile(syncedInts[path_sIndex + *current_path]->value);
 }
+void Enemy::updateTile()
+{
+	GameState& game =  GameState::getInstance();
+	Board& board = game.board;
+	Tile* current = board.getTile(*tile);
+
+	if ((int)(*x) != current->x || (int)(*y) != current->y)
+	{
+		Tile* willBeNext = GameState::getInstance().board.getTile(*x, *y);
+
+		current->enemys.erase(this->entityKey);
+		willBeNext->enemys.insert({ this->entityKey, this });
+
+		if (getNextTile()->tileID == willBeNext->tileID) {
+			(*current_path)++;
+			if (*current_path >= path_length - 1) {
+				*current_path = 0;
+			}
+		}
+
+		*tile = willBeNext->tileID;
+		
+	}
+
+}
 Tile* Enemy::getNextTile()
 {
 	return GameState::getInstance().board.getTile(syncedInts[path_sIndex + *current_path + 1]->value);
 }
 
 void Enemy::update(int dt) {
+	GameState& game = GameState::getInstance();
+	Board& board = game.board;
+
+	Tile* current = board.getTile(*tile);
 
 	// movement
 	if (*speed != 0) {
+		XMVECTOR pos = XMVectorSet(*x, *y, 0, 0);
+		XMVECTOR target = XMVectorSet(getNextTile()->x + .5f, getNextTile()->y + .5f, 0, 0);
+		XMVECTOR delta = XMVectorSubtract(target, pos);
+		XMVECTOR dir = XMVector3Normalize(delta);
 
+		vector<XMVECTOR> forces;
 
-		float target_x = getNextTile()->x + .5f;
-		float target_y = getNextTile()->y + .5f;
-
-		float delta_x = target_x - *x;
-		float delta_y = target_y - *y;
-
-		//float xMag = delta_x > delta_y ? 1 - delta_y / delta_x : delta_x / delta_y;
-		float xMag = abs(delta_x / (abs(delta_x) + abs(delta_y)));
-
-		*x += delta_x > 0 ? xMag * (*speed) * dt : -xMag * (*speed) * dt;
-		*y += delta_y > 0 ? (1 - xMag) * (*speed) * dt : -(1 - xMag) * (*speed) * dt;
-
-		if ((int)(*x) == getNextTile()->x && (int)(*y) == getNextTile()->y)
+		for (auto i : current->enemys)
 		{
-			(*current_path)++;
+			Enemy* e = i.second;
+			XMVECTOR pos2 = XMVectorSet(*(e->x), *(e->x), 0, 0);
+			XMVECTOR delta = XMVectorSubtract(pos, pos2);
+			float norm2 = XMVectorGetX(XMVector2Length(delta));
+			XMVECTOR dir = XMVector3Normalize(delta);
+			if (norm2 == 0) {
+				norm2 = 0.01f;
+				dir = XMVectorSet(1, 0, 0, 0);
+			}
+			XMVECTOR force = dir * (1/(norm2 * norm2));
+
+			forces.push_back(force);
 		}
+
+		XMVECTOR force_dir = dir;
+		for (XMVECTOR& f : forces) {
+			force_dir = XMVectorAdd(force_dir, XMVectorScale(f, 1.0f));
+		}
+
+		XMVECTOR move_dir = XMVector3Normalize(force_dir);
+
+		*x += XMVectorGetX(move_dir) * (*speed) * dt;
+		*y += XMVectorGetY(move_dir) * (*speed) * dt;
+
 	}
+
+	updateTile();
 }

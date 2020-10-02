@@ -38,4 +38,8 @@ private:
 
 	int path_length;
 	int path_sIndex;
+
+
+	void updateTile();
+
 };
