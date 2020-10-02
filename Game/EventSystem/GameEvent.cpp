@@ -1,5 +1,5 @@
 ﻿#include "GameEvent.h"
-#include "../gameentity.h"
+#include "../Entities/gameentity.h"
 #include "HelperAllEvents.h"
 //Helper
 template <class T>

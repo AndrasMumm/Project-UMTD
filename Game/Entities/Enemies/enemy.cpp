@@ -1,5 +1,5 @@
 ﻿#include "enemy.h"
-#include "gamestate.h"
+#include "../../gamestate.h"
 
 
 Enemy::Enemy()

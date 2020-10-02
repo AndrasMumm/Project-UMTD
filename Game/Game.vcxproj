@@ -97,23 +97,25 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="Buffs\buff.h" />
     <ClInclude Include="clock.h" />
-    <ClInclude Include="enemy.h" />
+    <ClInclude Include="Entities\Enemies\EnemyFactory.h" />
+    <ClInclude Include="Entities\Enemies\enemy.h" />
     <ClInclude Include="EventSystem\EventCallbackHandler.h" />
     <ClInclude Include="EventMgr.h" />
     <ClInclude Include="EventSystem\EventList.h" />
     <ClInclude Include="EventSystem\Events\CreateEnemyEvent.h" />
     <ClInclude Include="EventSystem\GameEvent.h" />
     <ClInclude Include="EventSystem\HelperAllEvents.h" />
-    <ClInclude Include="gameentity.h" />
+    <ClInclude Include="Entities\gameentity.h" />
     <ClInclude Include="gamestate.h" />
     <ClInclude Include="helpingHeader.h" />
     <ClInclude Include="Tile.h" />
-    <ClInclude Include="tower.h" />
+    <ClInclude Include="Entities\Tower\tower.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="board.cpp" />
     <ClCompile Include="clock.cpp" />
-    <ClCompile Include="enemy.cpp" />
+    <ClCompile Include="Entities\Enemies\EnemyFactory.cpp" />
+    <ClCompile Include="Entities\Enemies\enemy.cpp" />
     <ClCompile Include="EventSystem\EventCallbackHandler.cpp" />
     <ClCompile Include="EventMgr.cpp" />
     <ClCompile Include="EventSystem\GameEvent.cpp" />

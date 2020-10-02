@@ -20,7 +20,6 @@ SyncedEntity::~SyncedEntity()
 	for (syncedData<string>* p : syncedString) {
 		delete p;
 	}
-
 }
 void SyncedEntity::Update(int delta) {};
 void SyncedEntity::ReceiveSync(SyncDataPacket* packet) {};

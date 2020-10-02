@@ -1,6 +1,6 @@
 ﻿#include "EventCallbackHandler.h"
 #include <Network/Packets/Events/CreateEvent.h>
-#include <Game\gameentity.h>
+#include "../Entities/gameentity.h"
 #include <Network\EntityMgr.h>
 
 void EventCallbackHandler::CreateHandler(Packet* p, int sender)

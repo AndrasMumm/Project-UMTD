@@ -42,6 +42,4 @@ public:
 	std::vector<syncedData<int>*> syncedInts;
 	std::vector<syncedData<float>*> syncedFloat;
 	std::vector<syncedData<std::string>*> syncedString;
-
-
 };
