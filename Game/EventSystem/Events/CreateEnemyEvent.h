@@ -2,8 +2,6 @@
 #include "../GameEvent.h"
 #include <Network/server.h>
 
-#define NOT_SET_ENTITY_KEY -1
-
 class CreateEnemyEvent : public GameEvent
 {
 public:

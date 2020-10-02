@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "board.h"
-#include "tower.h"
-#include "enemy.h"
+#include "Entities/Tower/tower.h"
+#include "Entities/Enemies/enemy.h"
 #include <vector>
 #include <iostream>
 

@@ -21,12 +21,6 @@
     <ClInclude Include="gamestate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tower.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="enemy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="helpingHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -34,9 +28,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="gameentity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EventMgr.h">
@@ -60,11 +51,20 @@
     <ClInclude Include="EventSystem\HelperAllEvents.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Entities\gameentity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Enemies\enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Enemies\EnemyFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entities\Tower\tower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="enemy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="board.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -84,6 +84,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EventSystem\GameEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Enemies\enemy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entities\Enemies\EnemyFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "enemy.h"
+#include "../Enemies/enemy.h"
 
 enum TargetType
 {
