@@ -1,5 +1,6 @@
 ﻿#include "PacketMgr.h"
 #include "../server.h"
+#include "../client.h"
 
 PacketMgr::PacketMgr() {
 }
@@ -19,6 +20,7 @@ void PacketMgr::Send(Packet* packet, int recipient)
 	else
 	{
 		//We are client
+		Client::GetInstance().Send(packet);
 	}
 }
 

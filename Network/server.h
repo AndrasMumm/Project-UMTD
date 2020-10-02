@@ -8,7 +8,14 @@
 using namespace boost::asio;
 using ip::tcp;
 
+#define ALL_PARTICIPANTS_ID -1
+#define SERVER_ID -2
+#define NOBODY_ID -3
+
+
 #define DEFAULT_GAME_PORT 1234
+
+
 #define PACKET_DELIMTER 29 //'A'
 
 class Participant

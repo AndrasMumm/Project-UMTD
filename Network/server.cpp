@@ -155,7 +155,6 @@ void Server::HandleParticipant(Participant* participant)
 
 void Server::PingPacketHandler(Packet* p, int sender)
 {
-
 	Ping ping = Ping(p);
 	Pong pong = Pong(ping.GetMsg());
 	Server::GetInstance().Send(sender, &pong);
