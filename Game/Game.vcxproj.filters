@@ -51,6 +51,9 @@
     <ClInclude Include="EventSystem\EventCallbackHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Buffs\buff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="enemy.cpp">

@@ -11,6 +11,8 @@ void EventMgr::Update(GameEntity* entity, int tick)
 		toRemove.push_back(it);
 	}
 
+
+
 	for (auto it : toRemove)
 	{
 		events.erase(it);

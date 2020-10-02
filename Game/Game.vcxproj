@@ -95,6 +95,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="board.h" />
+    <ClInclude Include="Buffs\buff.h" />
     <ClInclude Include="clock.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="EventSystem\EventCallbackHandler.h" />

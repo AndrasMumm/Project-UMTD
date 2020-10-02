@@ -20,5 +20,5 @@ public:
 	virtual void Trigger(GameEntity* entity, int deltaTickDifference = 0) = 0;
 	virtual void OnCreate(GameEntity* entity) = 0;
 
-	void SendToAll(GameEntity* entity);
+	void SendToAll(int entityKey);
 };
