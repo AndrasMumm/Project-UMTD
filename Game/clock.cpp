@@ -1,11 +1,11 @@
-#include "clock.h"
+﻿#include "clock.h"
 
 int Clock::getTick()
 {
-    return tock;
+	return tock;
 }
 
 void Clock::tick()
 {
-    ++tock;
+	++tock;
 }

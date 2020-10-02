@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Filename: modelclass.h
+// Filename: fontclass.h
 ////////////////////////////////////////////////////////////////////////////////
-#ifndef _MODELCLASS_H_
-#define _MODELCLASS_H_
+#ifndef _FONTCLASS_H_
+#define _FONTCLASS_H_
 
 
 //////////////
@@ -13,6 +13,8 @@
 using namespace DirectX;
 #include <fstream>
 using namespace std;
+
+
 ///////////////////////
 // MY CLASS INCLUDES //
 ///////////////////////
@@ -20,50 +22,42 @@ using namespace std;
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Class name: ModelClass
+// Class name: FontClass
 ////////////////////////////////////////////////////////////////////////////////
-class ModelClass
+class FontClass
 {
 private:
+	struct FontType
+	{
+		float left, right;
+		int size;
+	};
 	struct VertexType
 	{
 		XMFLOAT3 position;
 		XMFLOAT2 texture;
-		XMFLOAT3 normal;
 	};
-	struct ModelType
-	{
-		float x, y, z;
-		float tu, tv;
-		float nx, ny, nz;
-	};
-
 
 public:
-	ModelClass();
-	ModelClass(const ModelClass&);
-	~ModelClass();
-	bool Initialize(ID3D11Device*, ID3D11DeviceContext*,  char const*, char const*);
+	FontClass();
+	FontClass(const FontClass&);
+	~FontClass();
+
+	bool Initialize(ID3D11Device*, ID3D11DeviceContext*, char const*, char const*);
 	void Shutdown();
-	void Render(ID3D11DeviceContext*);
 
-	int GetIndexCount();
 	ID3D11ShaderResourceView* GetTexture();
+	void BuildVertexArray(void*, char const*, float, float);
 
 private:
-	bool InitializeBuffers(ID3D11Device*);
-	void ShutdownBuffers();
-	void RenderBuffers(ID3D11DeviceContext*);
-	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*,  char const*);
+	bool LoadFontData(char const*);
+	void ReleaseFontData();
+	bool LoadTexture(ID3D11Device*, ID3D11DeviceContext*, char const*);
 	void ReleaseTexture();
-	bool LoadModel(char const*);
-	void ReleaseModel();
 
 private:
-	ID3D11Buffer* m_vertexBuffer, * m_indexBuffer;
-	int m_vertexCount, m_indexCount;
+	FontType* m_Font;
 	TextureClass* m_Texture;
-	ModelType* m_model;
 };
 
 #endif

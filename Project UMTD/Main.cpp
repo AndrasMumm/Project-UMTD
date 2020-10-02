@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <boost/asio.hpp>
 #include <windows.h>
 #include <Rendering/renderingMain.h>
 
@@ -26,13 +27,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 	}
 
 	//Game Objects
-	
+
 	GameState* gameState = new GameState();
 
 
 
 	// Initialize and run the system object.
-	
+
 	result = System->Initialize();
 	if (result)
 	{

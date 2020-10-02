@@ -2,23 +2,15 @@
 #include <Network/SyncedEntity.h>
 #include <Network/EntityMgr.h>
 #include <Game/clock.h>
-#include "helpingHeader.h"
-#include "Tile.h"
-class Enemy : public SyncedEntity
+#include "gameentity.h"
+
+class Enemy : public GameEntity
 {
 public:
 	Enemy();
-	Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, float x, float y, int tile, int birth, int death,vint& path);
+	Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, int tile, int birth, int death);
 
-	float* x;
-	float* y;
-
-	int getPath(int index);
-	Tile* getCurrentTile();
-	Tile* getNextTile();
-
-	void update(int dt);
-
+private:
 	float* speed;
 	float* hp;
 	float* size;
@@ -29,14 +21,8 @@ public:
 
 	int* tile;
 
+
 	int* birth;
 	int* death;
-
-	int* current_path;
-
-	int path_sIndex;
-	int path_length;
-
-
 
 };
