@@ -26,7 +26,7 @@ using namespace glm;
 
 typedef vector<vec3> vvec3;
 
-void createBlancBoard(Board* board,float gridSize, vvec3& vertices, vvec3& uvices);
+void createBlancBoard(Board* board, float gridSize, vvec3& vertices, vvec3& uvices);
 void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices);
 int screen_width = 1920 / 2;
 int screen_height = 1080 / 2;
@@ -108,7 +108,7 @@ int main(void)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// load and generate the texture
 	int width, height, nrChannels;
-	unsigned char *data = stbi_load("HexMap.png", &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load("HexMap.png", &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -132,20 +132,20 @@ int main(void)
 
 
 	Tile* start = game.board.getTile(0, 5);
-	game.enemys.push_back(new Enemy(.005f,1,1,1,1,1,1,start->x,start->y,start->tileID,0,-1,path[0]));
+	game.enemys.push_back(new Enemy(.005f, 1, 1, 1, 1, 1, 1, start->x, start->y, start->tileID, 0, -1, path[0]));
 
 	Enemy* e = game.enemys.back();
-	vec3 pos_off = vec3(*(e->x)*gridSize, -*(e->y)*gridSize, 0.0f);
+	vec3 pos_off = vec3(*(e->x) * gridSize, -*(e->y) * gridSize, 0.0f);
 
-	createBlancBoard(&game.board,gridSize, vertices, uvices);
+	createBlancBoard(&game.board, gridSize, vertices, uvices);
 
 	float y_off = 1;
 
 	float x_off = -1;
 
-	vertices.push_back(vec3(x_off, y_off-gridSize, .02f));
+	vertices.push_back(vec3(x_off, y_off - gridSize, .02f));
 	vertices.push_back(vec3(x_off, y_off, .02f));
-	vertices.push_back(vec3(x_off+gridSize, y_off, .02f));
+	vertices.push_back(vec3(x_off + gridSize, y_off, .02f));
 
 	uvices.push_back(vec3(0, 0, 1));
 	uvices.push_back(vec3(0, 0, 1));
@@ -179,7 +179,7 @@ int main(void)
 
 		// compute game update
 
-		e->update(1);
+		e->Update(1);
 
 		pos_off = vec3(*(e->x) * gridSize, -*(e->y) * gridSize, 0.0f);
 
@@ -221,7 +221,7 @@ int main(void)
 		);
 
 		// Draw the triangle !
-		glDrawArrays(GL_TRIANGLES, 0, vertices.size()*3); // 12*3 indices starting at 0 -> 12 triangles
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size() * 3); // 12*3 indices starting at 0 -> 12 triangles
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
@@ -247,30 +247,30 @@ int main(void)
 }
 
 void createBlancBoard(Board* board, float gridSize, vvec3& vertices, vvec3& uvices) {
-	
+
 
 	for (int x = 0; x < board->width; x++) {
 		for (int y = 0; y < board->height; y++) {
-			
+
 			float px = -1 + x * gridSize;
 			float pxp = px + gridSize;
 			float py = 1 - y * gridSize;
 			float pyp = py - gridSize;
 
-			addTile(vec3(px, py, 0.0f), vec3(pxp, pyp, 0.0f), board->getTile(x,y)->type, vertices, uvices);
+			addTile(vec3(px, py, 0.0f), vec3(pxp, pyp, 0.0f), board->getTile(x, y)->type, vertices, uvices);
 		}
 	}
 }
 
 void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices) {
-	
+
 	vec3 bl = vec3(tl.x, br.y, 0);
 	vec3 tr = vec3(br.x, tl.y, 0);
 
 	float u_offset = 0;
 	float v_offset = 0;
 
-	switch (type){
+	switch (type) {
 	case 0x1:
 	case 0x5:
 	case 0x9:

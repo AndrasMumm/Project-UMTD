@@ -5,7 +5,6 @@
 #include "Packets/Sync/SyncDataPacket.h"
 
 template <typename T>  class syncedData {
-
 public:
 	T value;
 	int lastSyncedAt;
@@ -16,7 +15,6 @@ public:
 
 
 class SyncedEntity {
-
 public:
 	SyncedEntity(int);
 	~SyncedEntity();

@@ -9,9 +9,11 @@ class Enemy : public GameEntity
 {
 public:
 	Enemy();
+	/*Lennos special testing enemy constructor. Remove once possible*/
 	Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, float x, float y, int tile, int birth, int death, vint& path);
-
-	void update(int dt);
+	//Actual proper constructor
+	Enemy(int entityKey, int level, float speed, float hp, float size, float armor, float shield, float regen, float x, float y, int birthTick, int typeID);
+	void Update(int dt);
 
 	int getPath(int index);
 	Tile* getNextTile();
@@ -20,6 +22,8 @@ public:
 	float* x;
 	float* y;
 
+	int enemyTypeID;
+	int* level;
 private:
 	float* speed;
 	float* hp;
@@ -27,7 +31,7 @@ private:
 	float* armor;
 	float* shield;
 	float* regen;
-	float* progress;
+
 
 	int* tile;
 
@@ -38,4 +42,5 @@ private:
 
 	int path_length;
 	int path_sIndex;
+	float* progress;
 };

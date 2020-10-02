@@ -11,14 +11,14 @@ private:
 	bool _sentToAll = false;
 
 public:
+	int ownerEntityKey;
 	int triggerTick;
 	int eventID;
-	int authorID;
 
-	GameEvent() = default;
-	virtual ~GameEvent() = 0;
+	GameEvent(int ownerEntityKey, int triggerTick, int eventID) : ownerEntityKey(ownerEntityKey), triggerTick(triggerTick), eventID(eventID) {};
+	~GameEvent() {};
 	virtual void Trigger(GameEntity* entity, int deltaTickDifference = 0) = 0;
 	virtual void OnCreate(GameEntity* entity) = 0;
 
-	void SendToAll(int entityKey);
+	void SendToAll();
 };

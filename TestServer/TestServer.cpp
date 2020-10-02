@@ -3,24 +3,50 @@
 
 #include <iostream>
 #include <Network\server.h>
+#include <Game\gamestate.h>
+#include <Game\Entities\Enemies\EnemyFactory.h>
+#include <Game\Entities\Enemies\EnemyTypeID.h>
 
 int main()
 {
 	Server::GetInstance().Start(1234);
 
+	GameState& gameState = GameState::getInstance();
+
+	auto startTime = TIME;
+	auto lastEnemySpawnedTick = 0;
+	auto previousTickStart = 0;
 	while (true)
 	{
-		Sleep(1000);
+		//First things first, we process all packets
+		PacketMgr::GetInstance().Process();
+
+		auto tickStart = TIME;
+		auto timePastBetweenTicks = tickStart - previousTickStart;
+		if (previousTickStart == 0) {
+			timePastBetweenTicks = TICK_TIME_MS;
+		}//Can directly start
+
+		//Check that we are not too fast
+		if (timePastBetweenTicks < TICK_TIME_MS)
+		{
+			auto timeToSleep = TICK_TIME_MS - timePastBetweenTicks - 1;
+			Sleep(timeToSleep);
+			timePastBetweenTicks = TIME - previousTickStart;
+		}
+
+		previousTickStart = TIME;
+
+		std::cout << "Time since last pulse: " << timePastBetweenTicks << std::endl;
+
+		if (TICK - lastEnemySpawnedTick >= 3 && TIME - startTime > 5000)
+		{
+			EnemyFactory::SpawnNewEnemy(ENEMY_TYPE_DEFAULT, 1, 0, 0, TICK + 5);
+			std::cout << "Queued spawn enemy event " << std::endl;
+			lastEnemySpawnedTick = TICK;
+		}
+
+		gameState.Update(1);
+		Clock::getInstance().tick();
 	}
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

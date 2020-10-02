@@ -4,10 +4,11 @@
 #include "Entities/Enemies/enemy.h"
 #include <vector>
 #include <iostream>
+#include "Entities/HardcodedEntityKeys.h"
 
 using namespace std;
 
-class GameState
+class GameState : public GameEntity
 {
 public:
 	static GameState& getInstance()
@@ -24,8 +25,8 @@ public:
 	vector<Enemy*> enemys;
 	vector<Tower*> towers;
 
-	void update();
-	void init();
+	void Update(int delta) override;
+	void Init();
 
 	int wave;
 

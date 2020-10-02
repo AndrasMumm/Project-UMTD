@@ -1,10 +1,14 @@
 ﻿#include "EntityMgr.h"
 
-int EntityMgr::addSyncedEntity(SyncedEntity* t)
+
+int EntityMgr::getNextEntityKey()
 {
-	int entityKey = ++lastGivenEntityKey;
+	return ++lastGivenEntityKey;
+}
+void EntityMgr::addSyncedEntity(SyncedEntity* t)
+{
+	int entityKey = t->entityKey;
 	syncedEntities.insert({ entityKey, t });
-	return entityKey;
 }
 
 void EntityMgr::removeSyncedEntity(SyncedEntity* toBeRemoved)

@@ -97,8 +97,11 @@
     <ClInclude Include="board.h" />
     <ClInclude Include="Buffs\buff.h" />
     <ClInclude Include="clock.h" />
+    <ClInclude Include="Entities\Enemies\EnemyTypeID.h" />
+    <ClInclude Include="Entities\Enemies\Types\DefaultEnemy.h" />
     <ClInclude Include="Entities\Enemies\EnemyFactory.h" />
     <ClInclude Include="Entities\Enemies\enemy.h" />
+    <ClInclude Include="Entities\HardcodedEntityKeys.h" />
     <ClInclude Include="EventSystem\EventCallbackHandler.h" />
     <ClInclude Include="EventMgr.h" />
     <ClInclude Include="EventSystem\EventList.h" />
@@ -114,8 +117,10 @@
   <ItemGroup>
     <ClCompile Include="board.cpp" />
     <ClCompile Include="clock.cpp" />
+    <ClCompile Include="Entities\Enemies\Types\DefaultEnemy.cpp" />
     <ClCompile Include="Entities\Enemies\EnemyFactory.cpp" />
     <ClCompile Include="Entities\Enemies\enemy.cpp" />
+    <ClCompile Include="EventSystem\Events\CreateEnemyEvent.cpp" />
     <ClCompile Include="EventSystem\EventCallbackHandler.cpp" />
     <ClCompile Include="EventMgr.cpp" />
     <ClCompile Include="EventSystem\GameEvent.cpp" />
