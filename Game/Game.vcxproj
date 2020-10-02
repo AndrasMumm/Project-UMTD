@@ -101,7 +101,9 @@
     <ClInclude Include="EventSystem\EventCallbackHandler.h" />
     <ClInclude Include="EventMgr.h" />
     <ClInclude Include="EventSystem\EventList.h" />
+    <ClInclude Include="EventSystem\Events\CreateEnemyEvent.h" />
     <ClInclude Include="EventSystem\GameEvent.h" />
+    <ClInclude Include="EventSystem\HelperAllEvents.h" />
     <ClInclude Include="gameentity.h" />
     <ClInclude Include="gamestate.h" />
     <ClInclude Include="helpingHeader.h" />

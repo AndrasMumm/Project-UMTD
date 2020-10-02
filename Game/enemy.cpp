@@ -6,9 +6,8 @@ Enemy::Enemy()
 {
 }
 
-Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, float x, float y, int tile, int birth, int death,vint& path)
+Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, float x, float y, int tile, int birth, int death, vint& path)
 {
-
 	syncedData<float>* sync_speed = new syncedData<float>();
 	sync_speed->flag = true;
 	sync_speed->lastSyncedAt = TICK;
@@ -64,7 +63,7 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 	sync_progress->flag = true;
 	sync_progress->lastSyncedAt = TICK;
 	sync_progress->syncFreq = 50;
-	sync_progress->value = progress; 
+	sync_progress->value = progress;
 	this->addSyncedData(sync_progress);
 	this->progress = &sync_progress->value;
 
@@ -140,11 +139,11 @@ int Enemy::getPath(int index)
 
 Tile* Enemy::getCurrentTile()
 {
-	return GameState::getInstance().board.getTile(syncedInts[path_sIndex + *current_path]->value);	
+	return GameState::getInstance().board.getTile(syncedInts[path_sIndex + *current_path]->value);
 }
 Tile* Enemy::getNextTile()
 {
-	return GameState::getInstance().board.getTile(syncedInts[path_sIndex + *current_path +1]->value);
+	return GameState::getInstance().board.getTile(syncedInts[path_sIndex + *current_path + 1]->value);
 }
 
 void Enemy::update(int dt) {
@@ -162,7 +161,7 @@ void Enemy::update(int dt) {
 		//float xMag = delta_x > delta_y ? 1 - delta_y / delta_x : delta_x / delta_y;
 		float xMag = abs(delta_x / (abs(delta_x) + abs(delta_y)));
 
-		*x += delta_x > 0 ?  xMag * (*speed) * dt : -xMag * (*speed) * dt;
+		*x += delta_x > 0 ? xMag * (*speed) * dt : -xMag * (*speed) * dt;
 		*y += delta_y > 0 ? (1 - xMag) * (*speed) * dt : -(1 - xMag) * (*speed) * dt;
 
 		if ((int)(*x) == getNextTile()->x && (int)(*y) == getNextTile()->y)
