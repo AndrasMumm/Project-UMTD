@@ -95,8 +95,6 @@ int main(void)
 	// Get a handle for our "MVP" uniform
 	GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
-	GLuint pos_offID = glGetUniformLocation(programID, "POS_OFF");
-
 	// Load the texture
 	unsigned int texture;
 	glGenTextures(1, &texture);
@@ -161,6 +159,13 @@ int main(void)
 	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
 	glBufferData(GL_ARRAY_BUFFER, uvices.size() * sizeof(uvices[0]), uvices.data(), GL_STATIC_DRAW);
 
+	mat4 transforms[100];
+	GLuint instanceVBO;
+	glGenBuffers(1, &instanceVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * 100, &transforms[0], GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 	do {
 
 		// Clear the screen
@@ -188,7 +193,6 @@ int main(void)
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, &MVP[0][0]);
-		glUniform3f(pos_offID, pos_off.x, pos_off.y, pos_off.z);
 
 		// Bind our texture in Texture Unit 0
 		glActiveTexture(GL_TEXTURE0);
@@ -220,9 +224,26 @@ int main(void)
 			(void*)0                          // array buffer offset
 		);
 
-		// Draw the triangle !
-		glDrawArrays(GL_TRIANGLES, 0, vertices.size()*3); // 12*3 indices starting at 0 -> 12 triangles
+		//update buffer;
+		for (int i = 0; i < game.enemys.size(); i++) {
+			//transforms[i] = glm::translate(glm::identity<mat4>(), vec3(*(game.enemys[i]->x)+gridSize, *(game.enemys[i]->x) + gridSize,.001f));
+			transforms[i] = glm::identity<mat4>();
+		
+		}
+		glEnableVertexAttribArray(2);
+		glBindBuffer(GL_ARRAY_BUFFER, instanceVBO);
+		glVertexAttribPointer(
+			2,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+			16,                                // size : U+V => 2
+			GL_FLOAT,                         // type
+			GL_FALSE,                         // normalized?
+			0,                                // stride
+			(void*)0                          // array buffer offset
+		);
 
+		// Draw the triangle !
+		glDrawArrays(GL_TRIANGLES, 0, vertices.size()*3 -3); // 12*3 indices starting at 0 -> 12 triangles
+		glDrawArraysInstanced(GL_TRIANGLES, vertices.size() * 3 - 3, game.enemys.size(),3);
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
 

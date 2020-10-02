@@ -3,13 +3,13 @@
 // Input vertex data, different for all executions of this shader.
 layout(location = 0) in vec3 vertexPosition_modelspace;
 layout(location = 1) in vec3 vertexUV;
+layout(location = 2) in mat4 objTransform;
 
 // Output data ; will be interpolated for each fragment.
 out vec3 UVc;
 
 // Values that stay constant for the whole mesh.
 uniform mat4 MVP;
-uniform vec3 POS_OFF;
 
 void main(){
 
@@ -17,8 +17,8 @@ void main(){
 	if(vertexPosition_modelspace.z == 0){
 		gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
 	}else{
-		gl_Position = MVP *  vec4(vertexPosition_modelspace + POS_OFF,1);
-		//gl_Position =  MVP * vec4(vertexPosition_modelspace,1);
+		gl_Position = MVP * objTransform * vec4(vertexPosition_modelspace,1) ;
+
 	}
 	// Output position of the vertex, in clip space : MVP * position
 	
