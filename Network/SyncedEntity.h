@@ -3,12 +3,7 @@
 #include <vector>
 #include <string>
 
-<<<<<<< HEAD
-
-template <typename T>  class syncedData{
-=======
 template <typename T>  class syncedData {
->>>>>>> 9c84ac98a8d19bef5a97efca2b763df9571586f2
 
 public:
 	T value;
