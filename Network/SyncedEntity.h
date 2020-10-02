@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 
+
 template <typename T>  class syncedData{
 
 public:
@@ -14,11 +15,10 @@ public:
 };
 
 
-
 class SyncedEntity {
 	
 public:
-	SyncedEntity();
+	SyncedEntity(int);
 	~SyncedEntity();
 	void addSyncedData(syncedData<int>*);
 	void addSyncedData(syncedData<float>*);
