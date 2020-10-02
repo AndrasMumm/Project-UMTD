@@ -33,6 +33,7 @@ public:
 	bool activelySynced;
 	int syncFreq;
 
+	void Update(int delta);
 
 	SyncedEntity(const SyncedEntity&) = default;
 	SyncedEntity& operator=(const SyncedEntity&) = default;
