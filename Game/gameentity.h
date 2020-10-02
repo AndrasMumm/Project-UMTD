@@ -6,6 +6,8 @@
 class GameEntity : public SyncedEntity
 {
 public:
+
+	GameEntity() : SyncedEntity(-1) {}
 	EventMgr eventManager;
 	void Update(int delta) override {
 		std::cout << "U fcked up! GameEntity without Update function" << std::endl;

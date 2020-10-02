@@ -2,6 +2,10 @@
 #include "gamestate.h"
 
 
+Enemy::Enemy()
+{
+}
+
 Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float regen, float progress, float x, float y, int tile, int birth, int death,vint& path)
 {
 
