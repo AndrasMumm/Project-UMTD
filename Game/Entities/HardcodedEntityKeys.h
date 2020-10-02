@@ -1,0 +1,1 @@
+﻿#define GAMESTATE_ENTITY_KEY 10

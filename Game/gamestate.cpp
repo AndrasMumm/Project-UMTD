@@ -1,17 +1,23 @@
 ﻿#include "gamestate.h"
 
 
-GameState::GameState() {
-	init();
-	update();
+GameState::GameState() : GameEntity(GAMESTATE_ENTITY_KEY) {
+	Init();
 }
 
-void GameState::update()
+void GameState::Update(int delta)
 {
+	//Calling it's own event system
+	eventManager.Update(delta);
+
+	for (Enemy* enemy : enemys)
+	{
+		enemy->Update(delta);
+	}
 }
 
-void GameState::init()
+
+void GameState::Init()
 {
-	system("cd");
 	board.loadBoardFromFile("..\\Maps\\1.map");
 }

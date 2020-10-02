@@ -30,7 +30,7 @@ using namespace glm;
 
 typedef vector<vec3> vvec3;
 
-void createBlancBoard(Board* board,float gridSize, vvec3& vertices, vvec3& uvices);
+void createBlancBoard(Board* board, float gridSize, vvec3& vertices, vvec3& uvices);
 void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices);
 int screen_width = 1920 / 2;
 int screen_height = 1080 / 2;
@@ -110,7 +110,7 @@ int main(void)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	// load and generate the texture
 	int width, height, nrChannels;
-	unsigned char *data = stbi_load("HexMap.png", &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load("HexMap.png", &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -141,7 +141,7 @@ int main(void)
 	
 
 	Enemy* e = game.enemys.back();
-	vec3 pos_off = vec3(*(e->x)*gridSize, -*(e->y)*gridSize, 0.0f);
+	vec3 pos_off = vec3(*(e->x) * gridSize, -*(e->y) * gridSize, 0.0f);
 
 	float x_off = -1;
 	float y_off = 1;
@@ -309,30 +309,30 @@ int main(void)
 }
 
 void createBlancBoard(Board* board, float gridSize, vvec3& vertices, vvec3& uvices) {
-	
+
 
 	for (int x = 0; x < board->width; x++) {
 		for (int y = 0; y < board->height; y++) {
-			
+
 			float px = -1 + x * gridSize;
 			float pxp = px + gridSize;
 			float py = 1 - y * gridSize;
 			float pyp = py - gridSize;
 
-			addTile(vec3(px, py, 0.0f), vec3(pxp, pyp, 0.0f), board->getTile(x,y)->type, vertices, uvices);
+			addTile(vec3(px, py, 0.0f), vec3(pxp, pyp, 0.0f), board->getTile(x, y)->type, vertices, uvices);
 		}
 	}
 }
 
 void addTile(vec3 tl, vec3 br, int type, vvec3& vertices, vvec3& uvices) {
-	
+
 	vec3 bl = vec3(tl.x, br.y, 0);
 	vec3 tr = vec3(br.x, tl.y, 0);
 
 	float u_offset = 0;
 	float v_offset = 0;
 
-	switch (type){
+	switch (type) {
 	case 0x1:
 	case 0x5:
 	case 0x9:

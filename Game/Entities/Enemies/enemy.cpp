@@ -136,6 +136,125 @@ Enemy::Enemy(float speed, float hp, float size, float armor, float shield, float
 
 }
 
+Enemy::Enemy(int entityKey, int level, float speed, float hp, float size, float armor, float shield, float regen, float x, float y, int birthTick, int typeID) : GameEntity(entityKey)
+{
+	syncedData<int>* sync_level = new syncedData<int>();
+	sync_level->flag = true;
+	sync_level->lastSyncedAt = TICK;
+	sync_level->syncFreq = 50;
+	sync_level->value = level;
+	this->addSyncedData(sync_level);
+	this->level = &sync_level->value;
+
+	syncedData<float>* sync_speed = new syncedData<float>();
+	sync_speed->flag = true;
+	sync_speed->lastSyncedAt = TICK;
+	sync_speed->syncFreq = 50;
+	sync_speed->value = speed;
+	this->addSyncedData(sync_speed);
+	this->speed = &sync_speed->value;
+
+
+	syncedData<float>* sync_hp = new syncedData<float>();
+	sync_hp->flag = true;
+	sync_hp->lastSyncedAt = TICK;
+	sync_hp->syncFreq = 50;
+	sync_hp->value = hp;
+	this->addSyncedData(sync_hp);
+	this->hp = &sync_hp->value;
+
+	syncedData<float>* sync_size = new syncedData<float>();
+	sync_size->flag = true;
+	sync_size->lastSyncedAt = TICK;
+	sync_size->syncFreq = 50;
+	sync_size->value = size;
+	this->addSyncedData(sync_size);
+	this->size = &sync_size->value;
+
+	syncedData<float>* sync_armor = new syncedData<float>();
+	sync_armor->flag = true;
+	sync_armor->lastSyncedAt = TICK;
+	sync_armor->syncFreq = 50;
+	sync_armor->value = armor;
+	this->addSyncedData(sync_armor);
+	this->armor = &sync_armor->value;
+
+
+	syncedData<float>* sync_shield = new syncedData<float>();
+	sync_shield->flag = true;
+	sync_shield->lastSyncedAt = TICK;
+	sync_shield->syncFreq = 50;
+	sync_shield->value = shield;
+	this->addSyncedData(sync_shield);
+	this->shield = &sync_shield->value;
+
+
+	syncedData<float>* sync_regen = new syncedData<float>();
+	sync_regen->flag = true;
+	sync_regen->lastSyncedAt = TICK;
+	sync_regen->syncFreq = 50;
+	sync_regen->value = regen;
+	this->addSyncedData(sync_regen);
+	this->regen = &sync_regen->value;
+
+	syncedData<float>* sync_progress = new syncedData<float>();
+	sync_progress->flag = true;
+	sync_progress->lastSyncedAt = TICK;
+	sync_progress->syncFreq = 50;
+	sync_progress->value = 0;
+	this->addSyncedData(sync_progress);
+	this->progress = &sync_progress->value;
+
+	syncedData<float>* sync_x = new syncedData<float>();
+	sync_x->flag = true;
+	sync_x->lastSyncedAt = TICK;
+	sync_x->syncFreq = 50;
+	sync_x->value = x;
+	this->addSyncedData(sync_x);
+	this->x = &sync_x->value;
+
+	syncedData<float>* sync_y = new syncedData<float>();
+	sync_y->flag = true;
+	sync_y->lastSyncedAt = TICK;
+	sync_y->syncFreq = 50;
+	sync_y->value = y;
+	this->addSyncedData(sync_y);
+	this->y = &sync_y->value;
+
+	syncedData<int>* sync_tile = new syncedData<int>();
+	sync_tile->flag = true;
+	sync_tile->lastSyncedAt = TICK;
+	sync_tile->syncFreq = 50;
+	sync_tile->value = GameState::getInstance().board.getTile(x, y)->tileID;
+	this->addSyncedData(sync_tile);
+	this->tile = &sync_tile->value;
+
+
+	syncedData<int>* sync_birth = new syncedData<int>();
+	sync_birth->flag = true;
+	sync_birth->lastSyncedAt = TICK;
+	sync_birth->syncFreq = 50;
+	sync_birth->value = birthTick;
+	this->addSyncedData(sync_birth);
+	this->birth = &sync_birth->value;
+
+	syncedData<int>* sync_death = new syncedData<int>();
+	sync_death->flag = true;
+	sync_death->lastSyncedAt = TICK;
+	sync_death->syncFreq = 50;
+	sync_death->value = -1;
+	this->addSyncedData(sync_death);
+	this->death = &sync_death->value;
+
+	syncedData<int>* sync_current_path = new syncedData<int>();
+	sync_current_path->flag = true;
+	sync_current_path->lastSyncedAt = TICK;
+	sync_current_path->syncFreq = 0;
+	sync_current_path->value = 0;
+	this->addSyncedData(sync_current_path);
+	this->current_path = &sync_current_path->value;
+}
+
 int Enemy::getPath(int index)
 {
 	if (index > path_length) return -1;

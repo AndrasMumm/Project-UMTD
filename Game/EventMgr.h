@@ -9,6 +9,8 @@ private:
 	std::multimap<int, GameEvent*> events;
 
 public:
-	void Update(GameEntity* entity, int tick);
-	void AddEvent(GameEntity* entity, GameEvent* event);
+	GameEntity* entity;
+	EventMgr(GameEntity* entity) : entity(entity) {};
+	void Update(int tick);
+	void AddEvent(GameEvent* event);
 };

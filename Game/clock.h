@@ -4,6 +4,8 @@
 #include <Network/SyncedEntity.h>
 
 #define TICK Clock::getInstance().getTick()
+#define TIME Clock::getInstance().getCurrentSystemTime()
+#define TICK_TIME_MS 1000ll
 
 class Clock
 {
@@ -16,6 +18,7 @@ public:
 	}
 	int getTick();
 	void tick();
+	long long getCurrentSystemTime();
 private:
 	Clock() {}
 

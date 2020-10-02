@@ -121,10 +121,23 @@ void Server::SendOverSocket(tcp::socket* socket, const char* data, int dataSize)
 
 void Server::Send(int participantID, Packet* p)
 {
-	int dSize = 0;
-	char* data = p->GetRaw(&dSize);
-	SendOverSocket(GetParticipant(participantID)->socket, data, dSize);
-	delete[] data;
+	if (participantID == -1)
+	{
+		for (auto participant : participants)
+		{
+			int dSize = 0;
+			char* data = p->GetRaw(&dSize);
+			SendOverSocket(GetParticipant(participant.second->id)->socket, data, dSize);
+			delete[] data;
+		}
+	}
+	else
+	{
+		int dSize = 0;
+		char* data = p->GetRaw(&dSize);
+		SendOverSocket(GetParticipant(participantID)->socket, data, dSize);
+		delete[] data;
+	}
 }
 
 void Server::HandleParticipant(Participant* participant)
