@@ -250,7 +250,7 @@ Enemy::Enemy(int entityKey, int level, float speed, float hp, float size, float 
 	sync_current_path->flag = true;
 	sync_current_path->lastSyncedAt = TICK;
 	sync_current_path->syncFreq = 0;
-	sync_current_path->value = 0;
+	sync_current_path->value = -1;
 	this->addSyncedData(sync_current_path);
 	this->current_path = &sync_current_path->value;
 }
@@ -272,13 +272,14 @@ Tile* Enemy::getNextTile()
 
 void Enemy::Update(int dt) {
 
+	eventManager.Update(dt);
 	GameState& game = GameState::getInstance();
 	Board& board = game.board;
 
 	Tile* current = board.getTile(*tile);
 
 	// movement
-	if (*speed != 0) {
+	if (*current_path != -1 && *speed != 0) {
 		XMVECTOR pos = XMVectorSet(*x, *y, 0, 0);
 		XMVECTOR target = XMVectorSet(getNextTile()->x + .5f, getNextTile()->y + .5f, 0, 0);
 		XMVECTOR delta = XMVectorSubtract(target, pos);

@@ -2,7 +2,7 @@
 #include <vector>
 #include <Game\clock.h>
 
-void EventMgr::Update(int tick)
+void EventMgr::Update(int dt)
 {
 	std::vector<std::multimap<int, GameEvent*>::iterator> toRemove;
 	auto it = events.begin();
